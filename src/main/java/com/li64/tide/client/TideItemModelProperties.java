@@ -1,187 +1,25 @@
 package com.li64.tide.client;
-
 import com.li64.tide.Tide;
 import com.li64.tide.data.item.TideItemData;
-import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.items.FishSatchelItem;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
-import net.minecraft.client.renderer.item.ItemProperties;
-//? if >=26.2 {
-import net.minecraft.resources.Identifier;
-//?} else {
-/*import net.minecraft.resources.ResourceLocation;
-*///?}
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.FishingRodItem;
-import net.minecraft.world.item.Items;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperties;
+import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
+import net.minecraft.world.entity.ItemOwner;
+import net.minecraft.world.item.ItemStack;
 
 public class TideItemModelProperties {
-
-        //? if >=26.2 {
-        public static final Identifier CAST_PROPERTY = Tide.resource("cast");
-        //?} else {
-        /*public static final ResourceLocation CAST_PROPERTY = Tide.resource("cast");
-        *///?}
-        public static final ClampedItemPropertyFunction CAST_FUNCTION = (
-                stack,
-                level,
-                player,
-                i
-        ) -> {
-                if (player == null) return 0;
-                boolean flag = player.getMainHandItem() == stack;
-                boolean flag1 = player.getOffhandItem() == stack;
-                if (
-                        player.getMainHandItem().getItem() instanceof
-                                FishingRodItem
-                ) flag1 = false;
-                return (flag || flag1) &&
-                        player instanceof Player &&
-                        ((Player) player).fishing != null
-                        ? 1
-                        : 0;
-        };
-
-        //? if >=26.2 {
-        public static final Identifier PULLING_PROPERTY = Tide.resource("pulling");
-        //?} else {
-        /*public static final ResourceLocation PULLING_PROPERTY = Tide.resource("pulling");
-        
-        *///?}
-        public static final ClampedItemPropertyFunction PULLING_FUNCTION = (
-                stack,
-                level,
-                player,
-                i
-        ) ->
-                player != null &&
-                player.isUsingItem() &&
-                player.getUseItem() == stack
-                        ? 1.0f
-                        : 0.0f;
-        //? if >=26.2 {
-        public static final Identifier PULL_PROPERTY = Tide.resource("pull");
-        //?} else {
-        /*public static final ResourceLocation PULL_PROPERTY = Tide.resource("pull");
-        *///?}
-        public static final ClampedItemPropertyFunction PULL_FUNCTION = (
-                stack,
-                level,
-                player,
-                i
-        ) -> {
-                if (player == null) return 0f;
-                return player.getUseItem() != stack
-                        ? 0f
-                        : (float) (stack.getUseDuration(
-                                  /*? if >=1.21 {*/ player /*?}*/
-                          ) - player.getUseItemRemainingTicks()) / 20f;
-        };
-
-        //? if >=26.2 {
-        public static final Identifier SATCHEL_STATE_PROPERTY = Tide.resource("satchel_state");
-        //?} else {
-        /*public static final ResourceLocation SATCHEL_STATE_PROPERTY = Tide.resource("satchel_state");
-        *///?}
-        public static final ClampedItemPropertyFunction SATCHEL_STATE_FUNCTION =
-                (stack, level, player, i) -> {
-                        boolean isOpen =
-                                TideItemData.FISH_SATCHEL_OPENED.getOrDefault(
-                                        stack,
-                                        false
-                                );
-                        int fishCount = FishSatchelItem.getFishCount(stack);
-                        if (isOpen) {
-                                if (fishCount > 0) return fishCount > 1
-                                        ? 1f
-                                        : 0.6f;
-                                return 0.3f;
-                        }
-                        return 0f;
-                };
-
-        public static void registerAll() {
-                ItemProperties.register(
-                        Items.FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.STONE_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.IRON_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.GOLDEN_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.CRYSTAL_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.DIAMOND_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.NETHERITE_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.ECHO_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.PRISMARINE_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.SUNFLOWER_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.VILLAGE_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.BLAZING_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.HONEYCOMB_FISHING_ROD,
-                        CAST_PROPERTY,
-                        CAST_FUNCTION
-                );
-
-                ItemProperties.register(
-                        TideItems.STARLIGHT_BOW,
-                        PULLING_PROPERTY,
-                        PULLING_FUNCTION
-                );
-                ItemProperties.register(
-                        TideItems.STARLIGHT_BOW,
-                        PULL_PROPERTY,
-                        PULL_FUNCTION
-                );
-
-                ItemProperties.register(
-                        TideItems.FISH_SATCHEL,
-                        SATCHEL_STATE_PROPERTY,
-                        SATCHEL_STATE_FUNCTION
-                );
+    public static void registerAll() {
+        RangeSelectItemModelProperties.ID_MAPPER.put(Tide.resource("satchel_state"), SatchelState.MAP_CODEC);
+    }
+    public record SatchelState() implements RangeSelectItemModelProperty {
+        public static final MapCodec<SatchelState> MAP_CODEC = MapCodec.unit(new SatchelState());
+        @Override public float get(ItemStack stack, ClientLevel level, ItemOwner owner, int seed) {
+            if (!TideItemData.FISH_SATCHEL_OPENED.getOrDefault(stack, false)) return 0f;
+            int count = FishSatchelItem.getFishCount(stack);
+            return count > 1 ? 1f : count == 1 ? 0.6f : 0.3f;
         }
+        @Override public MapCodec<SatchelState> type() { return MAP_CODEC; }
+    }
 }

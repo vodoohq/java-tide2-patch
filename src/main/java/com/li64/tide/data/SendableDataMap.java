@@ -114,13 +114,13 @@ public class SendableDataMap<T> {
 
         //? if >=26.2 {
         for (int i = 0; i < size; i++) keys.add(buf.readIdentifier());
-        for (int i = 0; i < size; i++) values.add(buf.readJsonWithCodec(codec));
+        for (int i = 0; i < size; i++) values.add(buf.readLenientJsonWithCodec(codec));
 
         Map<Identifier, T> map = new HashMap<>();
         //?} else {
         /*
         for (int i = 0; i < size; i++) keys.add(buf.readResourceLocation());
-        for (int i = 0; i < size; i++) values.add(buf.readJsonWithCodec(codec));
+        for (int i = 0; i < size; i++) values.add(buf.readLenientJsonWithCodec(codec));
 
         Map<ResourceLocation, T> map = new HashMap<>();
         */

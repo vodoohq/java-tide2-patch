@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "tide",
+  "name": "Tide 2 — Voodoo Fabric Port",
+  "version": "${version}",
+  "icon": "tide.png",
+  "description": "Community Fabric 26.3 port of Lightning64's Tide 2 fishing mod.",
+  "authors": ["Lightning64", "soleilfenley (26.2 migration)", "VoodooHQ (26.3 port)"],
+  "contact": {
+    "homepage": "https://github.com/vodoohq/java-tide2-patch",
+    "sources": "https://github.com/vodoohq/java-tide2-patch",
+    "issues": "https://github.com/vodoohq/java-tide2-patch/issues"
+  },
+  "license": "MPL-2.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.li64.tide.loaders.fabric.FabricEntrypoint"],
+    "client": ["com.li64.tide.loaders.fabric.FabricClientEntrypoint"],
+    "modmenu": ["com.li64.tide.compat.modmenu.ModMenuCompat"]
+  },
+  "mixins": ["tide.mixins.json"],
+  "accessWidener": "accesswideners/tide-26.3.classtweaker",
+  "depends": {
+    "minecraft": "26.3",
+    "java": ">=25",
+    "fabricloader": ">=0.19.5",
+    "fabric-api": ">=0.162.0",
+    "cloth-config": ">=26.3.159"
+  },
+  "breaks": {"tide-voodoo": "*"}
+}

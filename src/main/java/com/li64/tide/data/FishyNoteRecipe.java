@@ -35,7 +35,7 @@ public class FishyNoteRecipe extends CustomRecipe {
                 new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
         //?}
         public FishyNoteRecipe(/*? if <1.21 {*//*ResourceLocation id, *//*?}*/CraftingBookCategory category) {
-            super(/*? if <1.21 {*//*id, *//*?}*/category);
+            super();
 }
 
     private ItemStack getFishToConvert(/*? if >=1.21 {*/CraftingInput/*?} else {*//*CraftingContainer*//*?}*/ input) {
@@ -66,20 +66,14 @@ public class FishyNoteRecipe extends CustomRecipe {
     }
 
     @Override
-    public @NotNull ItemStack assemble(/*? if >=1.21 {*/CraftingInput input, HolderLookup.Provider registries
-                                       /*?} else {*//*CraftingContainer input, RegistryAccess registries*//*?}*/) {
+    public @NotNull ItemStack assemble(CraftingInput input) {
         ItemStack fish = getFishToConvert(input);
         if (fish == null || fish.isEmpty()) return ItemStack.EMPTY;
         return FishyNoteItem.create(new ItemStack(fish.getItem()));
     }
 
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return width * height > 2;
-    }
-
-    @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {
+@Override
+    public @NotNull RecipeSerializer<? extends CustomRecipe> getSerializer() {
         return TideRecipeSerializers.FISHY_NOTE_RECIPE;
     }
 }

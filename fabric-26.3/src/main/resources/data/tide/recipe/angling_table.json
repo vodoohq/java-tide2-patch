@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "#minecraft:planks",
+    "C": "#c:ingots/copper",
+    "S": "#c:strings"
+  },
+  "pattern": [
+    "SS",
+    "CC",
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:angling_table"
+  }
+}

@@ -62,7 +62,7 @@ public class TideFishingBobberLayer extends RenderLayer<TideFishingHookRenderSta
                     poseStack.pushPose();
                     poseStack.scale(0.5f, 0.5f, 0.5f);
                     poseStack.translate(0.03f, -0.22f, 0.0f);
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(180.0f));
+                    poseStack.rotate(Axis.ZP.rotationDegrees(180.0f));
 
                     ItemStackRenderState itemState = new ItemStackRenderState();
                     Minecraft.getInstance().getItemModelResolver().updateForTopItem(itemState, state.bobber, ItemDisplayContext.FIXED, null, null, state.id);
@@ -72,7 +72,7 @@ public class TideFishingBobberLayer extends RenderLayer<TideFishingHookRenderSta
             } else {
                     Identifier textureLocation = FishingBobberItem.getTexture(state.bobber);
                     RenderType renderType = RenderTypes.entityCutout(textureLocation);
-                    collector.submitModel(this.model, state, poseStack, renderType, packedLight, OverlayTexture.NO_OVERLAY, ARGB.color(255, 255, 255, 255), null, 0, null);
+                    collector.submitModel(this.model, state, poseStack, renderType, packedLight, OverlayTexture.NO_OVERLAY, ARGB.color(255, 255, 255, 255), null, 0);
             }
     }
 }
@@ -99,7 +99,7 @@ public class TideFishingBobberLayer extends RenderLayer<TideFishingHook, TideFis
             poseStack.pushPose();
             poseStack.scale(0.5f, 0.5f, 0.5f);
             poseStack.translate(0.03f, -0.22f, 0.0f);
-            poseStack.mulPose(Axis.ZP.rotationDegrees(180.0f));
+            poseStack.rotate(Axis.ZP.rotationDegrees(180.0f));
             this.itemRenderer.renderStatic(hookEntity.getBobber(),
                     ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY,
                     poseStack, buffer, hookEntity.level(), hookEntity.getId());
@@ -135,7 +135,7 @@ public class TideFishingBobberLayer extends RenderLayer<TideFishingHook, TideFis
             poseStack.pushPose();
             poseStack.scale(0.5f, 0.5f, 0.5f);
             poseStack.translate(0.03f, -0.22f, 0.0f);
-            poseStack.mulPose(Axis.ZP.rotationDegrees(180.0f));
+            poseStack.rotate(Axis.ZP.rotationDegrees(180.0f));
             this.itemRenderer.renderStatic(hookEntity.getBobber(),
                     ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY,
                     poseStack, buffer, hookEntity.level(), hookEntity.getId());

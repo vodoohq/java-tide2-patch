@@ -1,0 +1,34 @@
+{
+  "block": {
+    "id": "tide:wooden_crate",
+    "properties": {
+      "facing": "north",
+      "open": "false"
+    }
+  },
+  "conditions": [
+    {
+      "type": "tide:open_water",
+      "in_open_water": true
+    },
+    {
+      "type": "tide:freshwater"
+    },
+    {
+      "type": "tide:fluid",
+      "fluid": "water"
+    },
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    },
+    {
+      "type": "tide:above",
+      "y": 40
+    }
+  ],
+  "loot_table": "tide:chests/crates/surface_freshwater",
+  "weight": 1
+}

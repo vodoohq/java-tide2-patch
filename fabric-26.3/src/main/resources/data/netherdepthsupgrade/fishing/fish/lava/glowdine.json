@@ -1,0 +1,44 @@
+{
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:the_nether"
+      ]
+    },
+    {
+      "type": "tide:fluid",
+      "fluid": "lava"
+    },
+    {
+      "type": "tide:found_in",
+      "biomes": [
+        "#netherdepthsupgrade:is_glowdine_biome"
+      ]
+    }
+  ],
+  "display_data": {
+    "entity": "netherdepthsupgrade:glowdine",
+    "x": -0.05,
+    "y": -0.1,
+    "z": 0.05
+  },
+  "fish": "netherdepthsupgrade:glowdine",
+  "journal_profile": {
+    "description": "journal.description.netherdepthsupgrade.glowdine",
+    "group": "lava",
+    "location": "journal.info.location.lava",
+    "rarity": "uncommon"
+  },
+  "selection_weight": 30,
+  "size": {
+    "record_high_cm": 160,
+    "typical_high_cm": 100,
+    "typical_low_cm": 75
+  },
+  "speed": 1.25,
+  "strength": 0.65,
+  "associated_mods": [
+    "netherdepthsupgrade"
+  ]
+}

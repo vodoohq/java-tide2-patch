@@ -60,8 +60,8 @@ public class MagicChain extends TideParticles {
                 //?} else {
                 /*
                 return new MagicChain(level, x, y, z, sprites,
-                    1.0f + level.random.nextFloat() * 0.6f,
-                    (level.random.nextFloat() - 0.5f) * 200f);
+                    1.0f + level.getRandom().nextFloat() * 0.6f,
+                    (level.getRandom().nextFloat() - 0.5f) * 200f);
                 */
                 //?}
         }

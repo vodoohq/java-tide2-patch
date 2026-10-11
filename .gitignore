@@ -43,6 +43,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+.port-tools/
+fabric-26.3/*.log
+fabric-26.3/port-status.json
 /src/generated-1.21.1/resources/.cache/
 /src/generated-1.21.1/neoforge-resources/.cache/
 /src/generated-1.20.1/resources/.cache/

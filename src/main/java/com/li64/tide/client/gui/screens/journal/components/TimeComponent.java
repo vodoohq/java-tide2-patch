@@ -57,8 +57,8 @@ public class TimeComponent extends BarComponent {
         graphics.blit(RenderPipelines.GUI_TEXTURED, EMPTY_BAR, x + BAR_X, y + BAR_Y, 0, 0, BAR_WIDTH, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT, ARGB.white(1f));
         //?} else {
         /*
-        graphics.drawString(font, TITLE, center - font.width(TITLE) / 2, y, ProfileComponent.TEXT_COLOR, false);
-        graphics.blit(EMPTY_BAR, x + BAR_X, y + BAR_Y, 0, 0, BAR_WIDTH, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
+        graphics.text(font, TITLE, center - font.width(TITLE) / 2, y, ProfileComponent.TEXT_COLOR, false);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, EMPTY_BAR, x + BAR_X, y + BAR_Y, 0, 0, BAR_WIDTH, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
         */
         //?}
         for (TimeRange range : ranges) {
@@ -78,7 +78,7 @@ public class TimeComponent extends BarComponent {
             //?} else {
             /*
             graphics.renderTooltip(font, Component.literal(TideUtils.ticksToRealTime(time, Tide.CLIENT_CONFIG.journal.useAmPm)), mouseX, y + BAR_Y);
-            graphics.blit(CURSOR, mouseX - 1, y + BAR_Y, 0, 0, 3, 9, 3, 9);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, CURSOR, mouseX - 1, y + BAR_Y, 0, 0, 3, 9, 3, 9);
             */
             //?}
         }

@@ -1,0 +1,44 @@
+{
+  "behavior": "darts",
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    },
+    {
+      "type": "tide:fluid",
+      "fluid": "water"
+    },
+    {
+      "type": "tide:above",
+      "y": 40
+    },
+    {
+      "type": "tide:saltwater"
+    }
+  ],
+  "display_data": {
+    "entity": "fishofthieves:splashtail",
+    "x": -0.05,
+    "y": 0.03
+  },
+  "fish": "fishofthieves:splashtail",
+  "journal_profile": {
+    "description": "journal.description.fishofthieves.splashtail",
+    "group": "saltwater",
+    "location": "journal.info.location.saltwater"
+  },
+  "selection_weight": 50,
+  "size": {
+    "record_high_cm": 115,
+    "typical_high_cm": 60,
+    "typical_low_cm": 45
+  },
+  "speed": 0.95,
+  "strength": 0.5,
+  "associated_mods": [
+    "fishofthieves"
+  ]
+}

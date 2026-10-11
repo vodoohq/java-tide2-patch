@@ -29,7 +29,7 @@ public class TideFoods {
             ));
 
     public static Item.Properties apply(Item.Properties properties, FoodDefinition def) {
-        return properties.food(def.toProperties());
+        return properties.food(def.toProperties(), def.toConsumable());
     }
 
     public record FoodDefinition(int nutrition, float saturation, boolean fast, boolean alwaysEdible, List<FoodEffect> effects) {
@@ -49,18 +49,25 @@ public class TideFoods {
             return new FoodDefinition(nutrition, saturation, fast, true, effects);
         }
 
+        public net.minecraft.world.item.component.Consumable toConsumable() {
+            var builder = net.minecraft.world.item.component.Consumable.builder()
+                    .consumeSeconds(fast() ? 0.8F : 1.6F);
+            for (FoodEffect effect : effects()) {
+                builder.onConsume(new net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect(effect.effect(), effect.chance()));
+            }
+            return builder.build();
+        }
+
         public FoodProperties toProperties() {
             FoodProperties.Builder builder = new FoodProperties.Builder()
                     .nutrition(nutrition())
                     /*? if >=1.21 {*/.saturationModifier(saturation());
                     /*?} else {*//*.saturationMod(saturation());*//*?}*/
 
-            if (fast()) builder.fast();
+
             if (alwaysEdible()) builder/*? if >=1.21 {*/.alwaysEdible()/*?} else {*//*.alwaysEat()*//*?}*/;
 
-            for (FoodEffect effect : effects()) {
-                builder.effect(effect.effect(), effect.chance());
-            }
+
 
             return builder.build();
         }

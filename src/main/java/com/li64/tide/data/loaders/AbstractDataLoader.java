@@ -58,6 +58,16 @@ public abstract class AbstractDataLoader<T, R> extends SimplePreparableReloadLis
     */
     //?}
         var json = JsonParser.parseReader(reader);
+        // Optional integration entries can reference items that do not exist without their mod.
+        // Skip those entries before registry codecs try to resolve the absent items.
+        if (json.isJsonObject() && json.getAsJsonObject().has("associated_mods")
+                && json.getAsJsonObject().get("associated_mods").isJsonArray()) {
+            for (var association : json.getAsJsonObject().getAsJsonArray("associated_mods")) {
+                if (!association.isJsonPrimitive() || !association.getAsJsonPrimitive().isString()) continue;
+                String modId = association.getAsString();
+                if (!Tide.PLATFORM.isModLoaded(modId) && !Tide.PLATFORM.isModLoaded(modId.replace("-", "_"))) return;
+            }
+        }
         getEntryCodec().parse(JsonOps.INSTANCE, json)
                 .resultOrPartial(error -> {
                     if (Tide.SERVER_CONFIG.general.logDataErrors)

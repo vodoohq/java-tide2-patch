@@ -1,0 +1,53 @@
+{
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    },
+    {
+      "type": "tide:fluid",
+      "fluid": "water"
+    },
+    {
+      "type": "tide:above",
+      "y": 40
+    },
+    {
+      "type": "tide:saltwater"
+    }
+  ],
+  "display_data": {
+    "entity": "hybrid_aquatic:opah",
+    "roll": -90,
+    "x": 0.04,
+    "y": -0.48,
+    "z": 0.08
+  },
+  "fish": "hybrid_aquatic:opah",
+  "journal_profile": {
+    "description": "journal.description.hybrid_aquatic.opah",
+    "group": "saltwater",
+    "location": "journal.info.location.saltwater",
+    "rarity": "uncommon"
+  },
+  "modifiers": [
+    {
+      "type": "tide:temperature",
+      "preferred_temperature": 0.35,
+      "temperature_tolerance": 0.5
+    }
+  ],
+  "selection_weight": 20,
+  "size": {
+    "record_high_cm": 135,
+    "typical_high_cm": 90,
+    "typical_low_cm": 75
+  },
+  "speed": 0.8,
+  "strength": 0.5,
+  "associated_mods": [
+    "hybrid_aquatic"
+  ]
+}

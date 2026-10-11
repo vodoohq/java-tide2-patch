@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "tide:bait",
+    "R": "minecraft:rabbit_foot"
+  },
+  "pattern": [
+    "###",
+    "#R#",
+    "###"
+  ],
+  "result": {
+    "count": 16,
+    "id": "tide:lucky_bait"
+  }
+}

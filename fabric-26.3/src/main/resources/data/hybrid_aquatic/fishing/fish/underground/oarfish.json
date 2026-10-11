@@ -1,0 +1,43 @@
+{
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    },
+    {
+      "type": "tide:fluid",
+      "fluid": "water"
+    },
+    {
+      "type": "tide:below",
+      "y": 10
+    }
+  ],
+  "display_data": {
+    "entity": "hybrid_aquatic:oarfish",
+    "roll": -90,
+    "shape": "3x1",
+    "y": -0.3,
+    "z": 0.08
+  },
+  "fish": "hybrid_aquatic:oarfish",
+  "journal_profile": {
+    "description": "journal.description.hybrid_aquatic.oarfish",
+    "group": "underground",
+    "location": "journal.info.location.underground",
+    "rarity": "very_rare"
+  },
+  "selection_weight": 6,
+  "size": {
+    "record_high_cm": 850,
+    "typical_high_cm": 500,
+    "typical_low_cm": 250
+  },
+  "speed": 1.2,
+  "strength": 0.8,
+  "associated_mods": [
+    "hybrid_aquatic"
+  ]
+}

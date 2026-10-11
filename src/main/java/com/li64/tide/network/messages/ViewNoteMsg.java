@@ -2,7 +2,7 @@ package com.li64.tide.network.messages;
 
 import com.li64.tide.Tide;
 import com.li64.tide.client.TideClientHelper;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 //? if >=26.2 {
 import net.minecraft.resources.Identifier;
 //?} else {
@@ -24,12 +24,12 @@ public record ViewNoteMsg(ItemStack stack) implements TidePacketPayload {
         */
         //?}
         
-        public ViewNoteMsg(FriendlyByteBuf buf) {
-                this(buf.readJsonWithCodec(ItemStack./*? if >=1.21 {*/SIMPLE_ITEM_CODEC/*?} else {*//*CODEC*//*?}*/));
+        public ViewNoteMsg(RegistryFriendlyByteBuf buf) {
+                this(ItemStack.STREAM_CODEC.decode(buf));
         }
         
-        public static void encode(ViewNoteMsg message, FriendlyByteBuf buf) {
-                buf.writeJsonWithCodec(ItemStack./*? if >=1.21 {*/SIMPLE_ITEM_CODEC/*?} else {*//*CODEC*//*?}*/, message.stack);
+        public static void encode(ViewNoteMsg message, RegistryFriendlyByteBuf buf) {
+                ItemStack.STREAM_CODEC.encode(buf, message.stack);
         }
         
         public static void handle(ViewNoteMsg message, Player player) {

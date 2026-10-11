@@ -1,0 +1,40 @@
+{
+  "behavior": "plateau",
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:the_nether"
+      ]
+    },
+    {
+      "type": "tide:fluid",
+      "fluid": "lava"
+    }
+  ],
+  "display_data": {
+    "entity": "netherdepthsupgrade:bonefish",
+    "pitch": 5,
+    "roll": 45,
+    "x": 0.1,
+    "yaw": -5,
+    "z": 0.03
+  },
+  "fish": "netherdepthsupgrade:bonefish",
+  "journal_profile": {
+    "description": "journal.description.netherdepthsupgrade.bonefish",
+    "group": "lava",
+    "location": "journal.info.location.lava"
+  },
+  "selection_weight": 45,
+  "size": {
+    "record_high_cm": 210,
+    "typical_high_cm": 125,
+    "typical_low_cm": 80
+  },
+  "speed": 0.85,
+  "strength": 0.7,
+  "associated_mods": [
+    "netherdepthsupgrade"
+  ]
+}

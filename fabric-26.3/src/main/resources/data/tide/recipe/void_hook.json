@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "minecraft:crying_obsidian",
+    "D": "minecraft:dragon_breath"
+  },
+  "pattern": [
+    "  #",
+    "#D#",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:void_hook"
+  }
+}

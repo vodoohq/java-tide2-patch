@@ -121,7 +121,7 @@ public class TideItems {
     public static final Item STARLIGHT_BOW = register("starlight_bow", StarlightBowItem::new,
             new Item.Properties().rarity(Rarity.EPIC).durability(750));
     public static final Item DRAGONFIN_BOOTS = register("dragonfin_boots", DragonfinBootsItem::new, new Item.Properties()
-            /*? if >=1.21*/.durability(ArmorItem.Type.BOOTS.getDurability(37))
+            /*? if >=1.21*/.durability(net.minecraft.world.item.equipment.ArmorType.BOOTS.getDurability(37))
             .rarity(Rarity.EPIC).fireResistant());
 
     public static final Item ANGLING_TABLE = register("angling_table", properties -> new BlockItem(TideBlocks.ANGLING_TABLE, properties));
@@ -136,13 +136,13 @@ public class TideItems {
 
     public static final Item JELLY_TORCH = register("jelly_torch",  properties -> new JellyTorchBlockItem(TideBlocks.JELLY_TORCH, TideBlocks.JELLY_WALL_TORCH, Direction.DOWN, properties), new Item.Properties());
 
-    public static final Item COOKED_FISH = register("cooked_fish", Item::new, new Item.Properties().food(TideFoods.COOKED_FISH.toProperties()));
-    public static final Item SMALL_COOKED_FISH = register("small_cooked_fish", Item::new, new Item.Properties().food(TideFoods.TINY_COOKED_FISH.toProperties()));
-    public static final Item LARGE_COOKED_FISH = register("large_cooked_fish", Item::new, new Item.Properties().food(TideFoods.BIG_COOKED_FISH.toProperties()));
-    public static final Item GRILLED_TUNA = register("grilled_tuna", Item::new, new Item.Properties().food(TideFoods.GRILLED_TUNA.toProperties()));
+    public static final Item COOKED_FISH = register("cooked_fish", Item::new, new Item.Properties().food(TideFoods.COOKED_FISH.toProperties(), TideFoods.COOKED_FISH.toConsumable()));
+    public static final Item SMALL_COOKED_FISH = register("small_cooked_fish", Item::new, new Item.Properties().food(TideFoods.TINY_COOKED_FISH.toProperties(), TideFoods.TINY_COOKED_FISH.toConsumable()));
+    public static final Item LARGE_COOKED_FISH = register("large_cooked_fish", Item::new, new Item.Properties().food(TideFoods.BIG_COOKED_FISH.toProperties(), TideFoods.BIG_COOKED_FISH.toConsumable()));
+    public static final Item GRILLED_TUNA = register("grilled_tuna", Item::new, new Item.Properties().food(TideFoods.GRILLED_TUNA.toProperties(), TideFoods.GRILLED_TUNA.toConsumable()));
 
-    public static final Item FISH_SLICE = register("fish_slice", Item::new, new Item.Properties().food(TideFoods.FISH_SLICE.toProperties()));
-    public static final Item COOKED_FISH_SLICE = register("cooked_fish_slice", Item::new, new Item.Properties().food(TideFoods.COOKED_FISH_SLICE.toProperties()));
+    public static final Item FISH_SLICE = register("fish_slice", Item::new, new Item.Properties().food(TideFoods.FISH_SLICE.toProperties(), TideFoods.FISH_SLICE.toConsumable()));
+    public static final Item COOKED_FISH_SLICE = register("cooked_fish_slice", Item::new, new Item.Properties().food(TideFoods.COOKED_FISH_SLICE.toProperties(), TideFoods.COOKED_FISH_SLICE.toConsumable()));
 
     public static Item register(String name, Function<Item.Properties, Item> factory) {
         return register(name, factory, new Item.Properties());
@@ -150,7 +150,7 @@ public class TideItems {
 
     public static Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
         ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Tide.resource(name));
-        Item item = factory.apply(properties);
+        Item item = factory.apply(properties.setId(key));
         return register(key, item);
     }
 

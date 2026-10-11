@@ -1,92 +1,67 @@
-# Update on my attempt at a 26.2 port of Tide 2
-This month I wanted to challenge myself and learn a bit of Java by porting one of my favorite mods to a current version to use it for an upcoming stream; I'm primarily a content creator, and wanted to include Tide 2 as a part of my forever world.
+# Tide 2 — Voodoo Fabric 26.3 port
 
-And while I would still like to use Tide 2 in that world, me being a content creator is what's going to put an indefinite hold on that port. The only reason I had time this month is because I was supposed to be taking a break in that time. And coming back home soon, I want to get back on my grind; I'm incredibly excited for it!!
+A public, open source community port of Lightning64's full Tide 2 fishing mod for
+Voodoo SMP. Fish, bait, rod upgrades, the journal, minigame, lava and void fishing,
+crates and decorative displays are retained. This fork is currently an alpha.
 
-So here's what I'll say. There's still many things to port over for the new structures and classes, but some of the brunt is handled; albeit, without a lot of knowledge on how it will work/perform until everything is ported to start testing. I'm happy to have people use it as a jumping off point, as long as credit is attributed. 
+**Download:** https://github.com/vodoohq/java-tide2-patch/releases
 
-All in all, I'm happy I took the time. And even so, I was able to make at least one push on a TODO I saw. So I hope in the end I make some kind of contribution; at the very least, I learned a new language. That's valuable enough to me~! 
+## Install
 
-🤍🧋
+Import `VoodooSMP-26.3-tide-alpha.1.mrpack` in Modrinth App for the full Voodoo SMP
+pack. Tide is already bundled; dependencies and the original resource packs download
+automatically. Import `Tide2-Fabric-26.3-alpha.1.mrpack` for a smaller test instance.
 
+For an existing pack or server, put the Tide release jar in `mods/`, and install
+Fabric API 0.162.0+26.3 and Cloth Config 26.3.159 (Fabric). Use Minecraft 26.3,
+Fabric Loader 0.19.5 and Java 25. The server and every player need this Tide version.
+Remove any other Tide jar first. Modrinth publication is not required to import
+these packs; GitHub Releases provides their downloads.
 
-# Tide-2
-A Minecraft mod that expands the fishing experience, adding many new fish, mechanics, and rewards.
+## Build and verify
 
-Join the discord server if you have a question, feedback, or want to see what's happening!
+Install JDK 25. Generated resources are committed, so a normal build only needs Java.
 
-[![Discord](https://img.shields.io/discord/1306794817396805712?style=for-the-badge&logo=discord&logoSize=0&label=discord&labelColor=000000&color=3067bf)](https://discord.gg/773R6cruH6)
+```sh
+./gradlew build
+./gradlew :fabric-26.3:runGameTest
+./gradlew :fabric-26.3:runClientGameTest
+```
 
----
-## The Mechanics
+On Windows use `gradlew.bat`. On Linux run the client test inside `xvfb-run -a`
+when no display is available. Outputs are under `fabric-26.3/build/libs/`.
+GitHub Actions builds and tests changes; version tags publish prerelease assets.
 
-To get started, craft a fishing rod. This can be either the regular fishing rod from the base game, or one of the new fishing rods added by Tide.
+With Node.js installed, `node scripts/migrate-resources.mjs` regenerates the
+Minecraft 26.3 resources from the preserved upstream inputs.
+`node scripts/build-pack.mjs` exports both packs, jars and checksums to `build/release/`.
+The pack manifest pins verified download hashes. To capture a revised local pack,
+run `node scripts/capture-pack.mjs <profile-directory>` and review `pack/` changes.
+The exporter only captures selected settings, mods and resource packs.
 
-<p align="center">
-<img src="https://cdn.modrinth.com/data/cached_images/0e488efb856acb81e451706532c90278634cc230.png" alt="fishing-rods"/>
-</p>
+For an isolated compatibility test against another pack, set `TIDE_PACK_MODS` to
+its `mods` directory before running the client test. Its worlds are never opened.
+The installed Xaero World Map version currently deadlocks with Fabric's test harness
+when closing the test world. Set `TIDE_PACK_SKIP_WORLD_MAP=1` for a complete automated
+pack run; this only excludes it from that test, not from the downloadable pack.
 
-Cast your line by holding right-click and releasing, then wait patiently for a fish to arrive. Fish not biting? Try crafting some bait to increase your fishing speed or provide special bonuses.
+## Status
 
-Tide also adds a simple fishing minigame for each fish you catch. Right click when the bar is inside the colored region to reel in the fish, but be careful not to lose it! Each fish has its own unique movement behavior and strength, so stay alert.
+Five Tide server tests plus Fabric's self-test cover fishing data, cast hooks,
+crate/catch loot, persistence, accessories and note recipes. Client tests create
+a temporary world and exercise actual hook/fish rendering and the fishing screens.
+See [release notes](RELEASE-NOTES.md) for coverage and remaining playtesting.
 
-<p align="center">
-  <img src="https://cdn.modrinth.com/data/cached_images/b2f81cc4bf8c0a9e96dfc15ddf25397e9b63c029.png" alt="Minigame 1" width="380"/>
-  <img src="https://cdn.modrinth.com/data/cached_images/9fe368bf906dabc716263867b3b3b5b847e3a0cf.png" alt="Minigame 2" width="380"/>
-</p>
+Only **Fabric 26.3** is a supported build target in this fork. Legacy loader and
+version sources remain for reference; their old builds are not maintained here.
 
-_Some fish are easy to catch, while others aren't..._
+## Credits and license
 
----
-## Fishing Rod Customization
+Original mod: [Lightning64's Tide 2](https://github.com/Lightning-64/Tide-2).
+This port builds on [soleilfenley's 26.2 migration](https://github.com/soleilfenley/Tide-2/tree/26.2-port).
+The 26.3 migration is maintained by [VoodooHQ](https://github.com/vodoohq).
+This is an independent community fork.
 
-You can add hooks, lines, and cosmetic bobbers to any fishing rod using a new block, the **Angling Table**.
-
-A variety of accessories can be created with unique effects. Some of the bonuses include easier catches, extra luck, or even **lava and void fishing**!
-
-(or making your fishing rod look cool, in the case of the bobbers)
-
-<p align="center">
-  <img src="https://cdn.modrinth.com/data/cached_images/c4f1cde91876c4935727ae43e184b6a8320e6f56_0.webp" alt="Angling Table GUI" width="580"/>
-</p>
-
-_You can create any combination of hooks, lines, and bobbers at the Angling Table_
-
----
-## The Journal
-
-Keep track of all the fish you’ve caught via the **fishing journal**, a special book that gets updated every time you catch a fish. You can use it to track your completion progress, biggest catches, fish habitats, and much more.
-
-<p align="center">
-  <img src="https://cdn.modrinth.com/data/cached_images/de364f376cc0126704b46c0e8ca050340fdea33c.png" alt="Fishing Journal" width="380"/>
-  <img src="https://cdn.modrinth.com/data/cached_images/c0bd594fb53af8d08864ddcf0b56ae5774a9f19a.png" alt="Salmon Profile" width="380"/>
-</p>
-
-_Can you catch them all?_
-
-Want to know where you can catch a fish? You can find **fishy notes** in crates that hint at the locations of individual fish.
-
----
-## Customizability
-Many aspects of the mod can be changed to your liking.
-
-**Need to tweak something?**
-You might be able to find what you need in the config screen.
-
-**Looking to add a fish or modify existing ones?**
-Tide has a versatile **fish data** system, allowing mod or datapack developers to add their own fish to find in the world via JSON files.
-
-In addition to fish, you can also use datapacks to insert custom loot tables or crates to the fishing loot. Need help customizing something? Feel free to ask in the discord server.
-
----
-## Compatibility
-Tide is compatible with many amazing mods, including:
-- Hybrid Aquatic
-- Nether Depths Upgrade
-- Stardew Fishing
-- Fishing Real
-- Fish of Thieves
-- Serene Seasons
-- Fabric Seasons
-- Ecliptic Seasons
-- …and more!
+Tide source and modifications retain [MPL-2.0](LICENSE.txt).
+See [NOTICE.md](NOTICE.md) for attribution and external pack licenses, and
+[the preserved upstream README](docs/UPSTREAM-README.md) for the original feature guide.

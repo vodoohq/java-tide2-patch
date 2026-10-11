@@ -1,8 +1,7 @@
 package com.li64.tide.compat.hybridaquatic;
 
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
-import dev.hybridlabs.aquatic.entity.fish.StingrayEntity;
-import dev.hybridlabs.aquatic.entity.fish.StingrayEntity.Companion.Type;
+import com.li64.tide.compat.OptionalModBridge;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -70,13 +69,11 @@ public class HybridAquaticCompat {
 
         // Im not sure how to change this appropriately but its probably not needed anymore -Mystic
         public static void applyVariant(Entity entity, ItemStack stack) {
-                if (entity instanceof StingrayEntity stingray) {
-                        if (
-                                BuiltInRegistries.ITEM.getKey(stack.getItem())
-                                        .getPath()
-                                        .contains("blue")
-                        ) stingray.setVariant(Type.BLUE_SPOTTED);
-                        else stingray.setVariant(Type.SPOTTED_EAGLE);
+                if (entity.getClass().getName().equals("dev.hybridlabs.aquatic.entity.fish.StingrayEntity")) {
+                        String variant = BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath().contains("blue")
+                                ? "BLUE_SPOTTED" : "SPOTTED_EAGLE";
+                        Object value = OptionalModBridge.enumValue("dev.hybridlabs.aquatic.entity.fish.StingrayEntity$Companion$Type", variant);
+                        if (value != null) OptionalModBridge.call(entity, "setVariant", value);
                 }
         }
         

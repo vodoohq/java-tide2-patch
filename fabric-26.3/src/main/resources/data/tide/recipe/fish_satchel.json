@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#tide:fish",
+    "L": "#c:leathers"
+  },
+  "pattern": [
+    " L ",
+    "L#L",
+    " L "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:fish_satchel"
+  }
+}

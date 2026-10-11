@@ -52,10 +52,10 @@ public class FishingInfoOverlay {
                     placement.isTop()
                             ? PADDING + (font.lineHeight + LINE_SPACING) * i + offsetY
                             : graphics.guiHeight() - PADDING - (font.lineHeight + LINE_SPACING) * i - 9 - offsetY,
-                    0f, 0f, 9, 9, 9, 9
+                    0, 0, 9, 9, 9, 9
             );
             Component text = entry.getValue();
-            graphics.drawString(
+            graphics.text(
                     font, text,
                     placement.isLeft()
                             ? PADDING + 12 + offsetX

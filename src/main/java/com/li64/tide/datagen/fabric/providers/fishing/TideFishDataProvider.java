@@ -54,7 +54,7 @@ public class TideFishDataProvider extends SimpleDataProvider<FishData> {
             //?}
             if (TideFish.ENTITY_DATA.containsKey(itemKey.getPath())) {
                 // add bucket item
-                builder.bucket(BuiltInRegistries.ITEM.get(itemKey.withSuffix("_bucket")));
+                builder.bucket(BuiltInRegistries.ITEM.getValue(itemKey.withSuffix("_bucket")));
             }
             builder.build(output);
         });

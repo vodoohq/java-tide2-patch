@@ -55,7 +55,7 @@ public class ApplyFishEntityLengthFunction implements LootItemFunction {
     public ItemStack apply(ItemStack stack, LootContext context) {
         if (Tide.SERVER_CONFIG.items.fishItemSizes != TideServerConfig.Items.SizeMode.ALWAYS
                 || FishData.get(stack).map(FishData::size).isEmpty()) return stack;
-        Entity entity = context.getParamOrNull(LootContextParams.THIS_ENTITY);
+        Entity entity = context.getOptional(LootContextParams.THIS_ENTITY);
         if (entity == null) return stack;
         if (entity instanceof FishLengthHolder lengthHolder) {
             TideItemData.FISH_LENGTH.set(stack, lengthHolder.tide$getLength());

@@ -1,0 +1,13 @@
+{
+  "pack": {
+    "description": "Tide 2 — Voodoo Fabric 26.3 port",
+    "min_format": [
+      97,
+      1
+    ],
+    "max_format": [
+      97,
+      1
+    ]
+  }
+}

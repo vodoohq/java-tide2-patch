@@ -1,0 +1,7 @@
+{
+  "wants": {"id": "minecraft:emerald", "count": 15},
+  "gives": {"id": "tide:village_fishing_rod"},
+  "max_uses": 1,
+  "xp": 15,
+  "reputation_discount": 0.05
+}

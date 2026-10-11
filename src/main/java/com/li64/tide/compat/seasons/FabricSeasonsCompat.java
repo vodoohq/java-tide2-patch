@@ -1,16 +1,17 @@
 //? if fabric {
 package com.li64.tide.compat.seasons;
 
-import io.github.lucaargolo.seasons.FabricSeasons;
+import com.li64.tide.compat.OptionalModBridge;
 import net.minecraft.world.level.Level;
 
 public class FabricSeasonsCompat {
     public static Season getSeason(Level level) {
-        return switch (FabricSeasons.getCurrentSeason(level)) {
-            case SPRING -> Season.SPRING;
-            case SUMMER -> Season.SUMMER;
-            case FALL -> Season.FALL;
-            case WINTER -> Season.WINTER;
+        Object season = OptionalModBridge.callStatic("io.github.lucaargolo.seasons.FabricSeasons", "getCurrentSeason", level);
+        return switch (season == null ? "SPRING" : season.toString().toUpperCase(java.util.Locale.ROOT)) {
+            case "SUMMER" -> Season.SUMMER;
+            case "FALL", "AUTUMN" -> Season.FALL;
+            case "WINTER" -> Season.WINTER;
+            default -> Season.SPRING;
         };
     }
 }

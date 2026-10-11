@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "tide:crystal_shrimp"
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:amethyst_shard"
+  }
+}

@@ -2794,7 +2794,7 @@ public class TideFish {
             .build();
 
     public static final Item CHORUS_COD = new Builder("chorus_cod")
-            .item(ChorusFruitItem::new)
+            .item(properties -> new Item(properties.component(net.minecraft.core.component.DataComponents.CONSUMABLE, net.minecraft.world.item.component.Consumables.CHORUS_FRUIT).useCooldown(1.0F)))
             .food(TideFoods.RAW_FISH.withAlwaysEdible())
             .fishData(builder -> builder
                     .size(55.0, 75.0, 110.0)
@@ -3156,7 +3156,7 @@ public class TideFish {
 
         public Item build() {
             ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Tide.resource(id));
-            Item item = factory.apply(properties);
+            Item item = factory.apply(properties.setId(key));
 
             // Saving all of this datagen utility data may take up large portions
             // of memory, so only add these when running in a dev environment
@@ -3191,10 +3191,10 @@ public class TideFish {
         @SuppressWarnings("unchecked")
         private <T extends Mob> void createSpawningItems(String key, FishEntityData<T> entityData) {
             EntityType<T> type = (EntityType<T>) TideEntityTypes.ENTITY_TYPES
-                    .computeIfAbsent(key, k -> entityData.createEntityBuilder().build(k));
+                    .computeIfAbsent(key, k -> entityData.createEntityBuilder().build(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE, Tide.resource(k))));
 
             Item egg = TideItems.register(key + "_spawn_egg", properties ->
-                    new SpawnEggItem(type, 0xffffff, 0x000000, properties));
+                    new SpawnEggItem(properties.spawnEgg(type)));
             Item bucket = TideItems.register(key + "_bucket", properties -> entityData.bucketBuilder().apply(type, properties),
                     new Item.Properties().stacksTo(1)/*? if >=1.21 {*/.component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)/*?}*/);
 

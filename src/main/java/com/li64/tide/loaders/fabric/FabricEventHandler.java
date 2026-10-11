@@ -18,8 +18,8 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
+
 
 
 //? if >= 26.2 {
@@ -75,35 +75,35 @@ public class FabricEventHandler {
             }
 
             if (key == BuiltInLootTables.UNDERWATER_RUIN_BIG || key == BuiltInLootTables.UNDERWATER_RUIN_SMALL) {
-                tableBuilder.pool(new LootPool.Builder().setRolls(UniformGenerator.between(1, 2))
+                tableBuilder.pool(new LootPool.Builder().setRolls(ContextIntProviders.between(1, 2))
                         .add(LootItem.lootTableItem(TideItems.BAIT).setWeight(20)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(4))))
                         .build()
                 );
             }
 
             if (key == BuiltInLootTables.SHIPWRECK_SUPPLY) {
-                tableBuilder.pool(new LootPool.Builder().setRolls(UniformGenerator.between(1, 2))
+                tableBuilder.pool(new LootPool.Builder().setRolls(ContextIntProviders.between(1, 2))
                         .add(LootItem.lootTableItem(TideItems.BAIT).setWeight(10)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(4))))
                         .add(LootItem.lootTableItem(TideItems.LUCKY_BAIT).setWeight(10)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(4))))
                         .build()
                 );
             }
 
             if (key == BuiltInLootTables.BURIED_TREASURE) {
-                tableBuilder.pool(new LootPool.Builder().setRolls(ConstantValue.exactly(2))
+                tableBuilder.pool(new LootPool.Builder().setRolls(ContextIntProviders.exactly(2))
                         .add(LootItem.lootTableItem(TideItems.LUCKY_BAIT).setWeight(5)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(4))))
                         .add(LootItem.lootTableItem(TideItems.MAGNETIC_BAIT).setWeight(5)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(6))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(6))))
                         .build()
                 );
             }
 
             if (key == BuiltInLootTables.ANCIENT_CITY) {
-                tableBuilder.pool(new LootPool.Builder().setRolls(ConstantValue.exactly(1))
+                tableBuilder.pool(new LootPool.Builder().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(TideItems.ECHO_FISHING_ROD))
                                 .when(LootItemRandomChanceCondition.randomChance(0.1f))
                         .build()
@@ -111,7 +111,7 @@ public class FabricEventHandler {
             }
 
             if (key == BuiltInLootTables.NETHER_BRIDGE) {
-                tableBuilder.pool(new LootPool.Builder().setRolls(ConstantValue.exactly(1))
+                tableBuilder.pool(new LootPool.Builder().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(TideItems.BLAZING_FISHING_ROD))
                         .when(LootItemRandomChanceCondition.randomChance(0.3f))
                         .build()
@@ -125,7 +125,7 @@ public class FabricEventHandler {
             if (key == EntityType.ELDER_GUARDIAN.getDefaultLootTable()) {
             */
             //?}
-                tableBuilder.pool(new LootPool.Builder().setRolls(ConstantValue.exactly(1))
+                tableBuilder.pool(new LootPool.Builder().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(TideItems.PRISMARINE_FISHING_ROD))
                         .when(LootItemRandomChanceCondition.randomChance(0.5f))
                         .build()

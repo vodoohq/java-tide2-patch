@@ -256,7 +256,7 @@ public class FishProfile implements Renderable {
         // render background
         int tlX = (graphics.guiWidth() - BG_WIDTH) / 2;
         int tlY = (graphics.guiHeight() - BG_HEIGHT) / 2;
-        graphics.blit(BORDERS, tlX, tlY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BORDERS, tlX, tlY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
 
         // render title
         int titleX = tlX + 110;
@@ -264,8 +264,8 @@ public class FishProfile implements Renderable {
         Component title = TideUtils.removeRawTextInName(fish.getHoverName());
         int titleWidth = font.width(title);
         int underlineWidth = titleWidth + 6;
-        graphics.drawString(font, title, titleX - titleWidth / 2, titleY, TEXT_COLOR, false);
-        graphics.blitSprite(FishingJournal.LINE_BOTTOM, titleX - underlineWidth / 2,
+        graphics.text(font, title, titleX - titleWidth / 2, titleY, TEXT_COLOR, false);
+        graphics.blitSprite(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, FishingJournal.LINE_BOTTOM, titleX - underlineWidth / 2,
                 titleY + font.lineHeight + 2, underlineWidth, 2);
 
         // get fish sizing and offsets
@@ -304,8 +304,8 @@ public class FishProfile implements Renderable {
         // pop shadow offset
         graphics.pose().popPose();
 
-        if (!isLarge) graphics.renderItem(fish, itemCenterX - fishSize / 2, itemCenterY - fishSize / 2);
-        else graphics.blit(alternateTexture,
+        if (!isLarge) graphics.item(fish, itemCenterX - fishSize / 2, itemCenterY - fishSize / 2);
+        else graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, alternateTexture,
                 itemCenterX - fishSize / 2, itemCenterY - fishSize / 2,
                 0, 0, fishSize, fishSize, fishSize, fishSize);
 
@@ -316,11 +316,11 @@ public class FishProfile implements Renderable {
         int stars = rarity.getNumStars();
         int rarityX = tlX + 40;
         int rarityY = tlY + 167;
-        graphics.drawString(font, rarityPrefix, rarityX, rarityY, TEXT_COLOR, false);
-        for (int i = 0; i < stars; i++) graphics.blit(STAR,
+        graphics.text(font, rarityPrefix, rarityX, rarityY, TEXT_COLOR, false);
+        for (int i = 0; i < stars; i++) graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, STAR,
                 rarityX + font.width(rarityPrefix) + i * 8, rarityY, 0, 0,
                 7, 6, 7, 6);
-        graphics.drawString(font, ")", rarityX + font.width(rarityPrefix) + stars * 8, rarityY, TEXT_COLOR, false);
+        graphics.text(font, ")", rarityX + font.width(rarityPrefix) + stars * 8, rarityY, TEXT_COLOR, false);
 
         // render description
         int descX = tlX + 38;
@@ -328,7 +328,7 @@ public class FishProfile implements Renderable {
         List<FormattedCharSequence> descriptionLines = font.split(this.description, 156);
         descY -= (descriptionLines.size() * font.lineHeight) / 2;
         for (int i = 0; i < descriptionLines.size(); i++) {
-            graphics.drawString(font, descriptionLines.get(i), descX,
+            graphics.text(font, descriptionLines.get(i), descX,
                     descY + i * font.lineHeight, TEXT_COLOR, false);
         }
 
@@ -348,7 +348,7 @@ public class FishProfile implements Renderable {
         // render background
         int tlX = (graphics.guiWidth() - BG_WIDTH) / 2;
         int tlY = (graphics.guiHeight() - BG_HEIGHT) / 2;
-        graphics.blit(BORDERS, tlX, tlY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BORDERS, tlX, tlY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
 
         // render title
         int titleX = tlX + 110;
@@ -356,7 +356,7 @@ public class FishProfile implements Renderable {
         Component title = TideUtils.removeRawTextInName(fish.getHoverName());
         int titleWidth = font.width(title);
         int underlineWidth = titleWidth + 6;
-        graphics.drawString(font, title, titleX - titleWidth / 2, titleY, TEXT_COLOR, false);
+        graphics.text(font, title, titleX - titleWidth / 2, titleY, TEXT_COLOR, false);
         TideUtils.blitNineSliced(graphics, FishingJournal.LINE_BOTTOM, titleX - underlineWidth / 2,
                 titleY + font.lineHeight + 2, underlineWidth, 2, 3, 0,
                 71, 2, 0, 0, 71, 2);
@@ -397,8 +397,8 @@ public class FishProfile implements Renderable {
         // pop shadow offset
         graphics.pose().popPose();
 
-        if (!isLarge) graphics.renderItem(fish, itemCenterX - fishSize / 2, itemCenterY - fishSize / 2);
-        else graphics.blit(alternateTexture,
+        if (!isLarge) graphics.item(fish, itemCenterX - fishSize / 2, itemCenterY - fishSize / 2);
+        else graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, alternateTexture,
                 itemCenterX - fishSize / 2, itemCenterY - fishSize / 2,
                 0, 0, fishSize, fishSize, fishSize, fishSize);
 
@@ -409,11 +409,11 @@ public class FishProfile implements Renderable {
         int stars = rarity.getNumStars();
         int rarityX = tlX + 40;
         int rarityY = tlY + 167;
-        graphics.drawString(font, rarityPrefix, rarityX, rarityY, TEXT_COLOR, false);
-        for (int i = 0; i < stars; i++) graphics.blit(STAR,
+        graphics.text(font, rarityPrefix, rarityX, rarityY, TEXT_COLOR, false);
+        for (int i = 0; i < stars; i++) graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, STAR,
                 rarityX + font.width(rarityPrefix) + i * 8, rarityY, 0, 0,
                 7, 6, 7, 6);
-        graphics.drawString(font, ")", rarityX + font.width(rarityPrefix) + stars * 8, rarityY, TEXT_COLOR, false);
+        graphics.text(font, ")", rarityX + font.width(rarityPrefix) + stars * 8, rarityY, TEXT_COLOR, false);
 
         // render description
         int descX = tlX + 38;
@@ -421,7 +421,7 @@ public class FishProfile implements Renderable {
         List<FormattedCharSequence> descriptionLines = font.split(this.description, 156);
         descY -= (descriptionLines.size() * font.lineHeight) / 2;
         for (int i = 0; i < descriptionLines.size(); i++) {
-            graphics.drawString(font, descriptionLines.get(i), descX,
+            graphics.text(font, descriptionLines.get(i), descX,
                     descY + i * font.lineHeight, TEXT_COLOR, false);
         }
 

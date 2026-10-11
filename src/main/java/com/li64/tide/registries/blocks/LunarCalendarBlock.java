@@ -32,10 +32,7 @@ public class LunarCalendarBlock extends HorizontalDirectionalBlock {
     }
 
     //? if >=1.21 {
-    public static final MapCodec<LunarCalendarBlock> CODEC = simpleCodec(LunarCalendarBlock::new);
-    @Override protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-        return CODEC;
-    }
+
     //?}
 
     @Override

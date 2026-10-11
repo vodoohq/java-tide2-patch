@@ -47,16 +47,9 @@ public class SonarOverlay {
         int x = graphics.guiWidth() / 2 - 8;
         int y = graphics.guiHeight() / 2 + 12;
         float alpha = fadeout / MAX_FADEOUT;
-
-        RenderSystem.enableBlend();
-        graphics.setColor(1f, 1f, 1f, alpha);
-
-        /*? if >=1.21 {*/graphics.blitSprite(SLOT_BACKGROUND_SPRITE, x - 4, y - 4, 24, 24);
-        /*?} else {*//*graphics.blit(SLOT_BACKGROUND_SPRITE, x - 4, y - 4, 0, 0, 24, 24, 24, 24);*//*?}*/
-        graphics.renderItem(stack, x, y);
-
-        RenderSystem.disableBlend();
-        graphics.setColor(1f, 1f, 1f, 1f);
+        /*? if >=1.21 {*/graphics.blitSprite(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, SLOT_BACKGROUND_SPRITE, x - 4, y - 4, 24, 24, net.minecraft.util.ARGB.white(alpha));
+        /*?} else {*//*graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, SLOT_BACKGROUND_SPRITE, x - 4, y - 4, 0, 0, 24, 24, 24, 24);*//*?}*/
+        graphics.item(stack, x, y);
     }
 
     public static void show(ItemStack stack) {

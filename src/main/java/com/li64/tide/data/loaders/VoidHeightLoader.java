@@ -15,9 +15,9 @@ import net.minecraft.util.profiling.ProfilerFiller;
 
 import java.util.Map;
 
-public class VoidHeightLoader extends SimpleJsonResourceReloadListener {
+public class VoidHeightLoader extends SimpleJsonResourceReloadListener<JsonElement> {
     public VoidHeightLoader(Gson gson) {
-        super(gson, "");
+        super(com.mojang.serialization.Codec.PASSTHROUGH.xmap(dynamic -> dynamic.convert(com.mojang.serialization.JsonOps.INSTANCE).getValue(), json -> new com.mojang.serialization.Dynamic<>(com.mojang.serialization.JsonOps.INSTANCE, json)), net.minecraft.resources.FileToIdConverter.json(""));
     }
 
     //? if >=26.2 {

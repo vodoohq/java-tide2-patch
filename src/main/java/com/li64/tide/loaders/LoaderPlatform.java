@@ -21,7 +21,7 @@ public interface LoaderPlatform {
 
     default String getMCVersion() {
             //? if >=26.2 {
-            return "26.2";
+            return net.minecraft.SharedConstants.getCurrentVersion().name();
             //?} elif >=1.21 {
             /*return "1.21.1";*/
             //?} else {

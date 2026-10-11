@@ -23,10 +23,7 @@ public class WeatherRadioBlock extends HorizontalDirectionalBlock {
     }
 
     //? if >=1.21 {
-    public static final MapCodec<WeatherRadioBlock> CODEC = simpleCodec(WeatherRadioBlock::new);
-    @Override protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-        return CODEC;
-    }
+
     //?}
 
     @Override

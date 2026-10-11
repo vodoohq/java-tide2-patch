@@ -1,0 +1,84 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "add": false,
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 5,
+              "min": 1
+            },
+            "type": "minecraft:set_count"
+          },
+          "name": "minecraft:end_stone",
+          "weight": 70
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:chorus_fruit",
+          "weight": 70
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:ender_pearl",
+          "weight": 65
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:popped_chorus_fruit",
+          "weight": 55
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shulker_shell",
+          "quality": 1,
+          "weight": 35
+        },
+        {
+          "type": "minecraft:item",
+          "modifier": {
+            "condition": {
+              "chance": 0.5,
+              "type": "minecraft:random_chance"
+            },
+            "type": "minecraft:enchant_with_levels",
+            "levels": 15,
+            "options": "#minecraft:on_random_loot"
+          },
+          "name": "minecraft:elytra",
+          "quality": 2,
+          "weight": 7
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 8,
+        "min": 6
+      }
+    },
+    {
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "condition": {
+            "chance": 0.85,
+            "type": "minecraft:random_chance"
+          },
+          "modifier": {
+            "add": false,
+            "count": 1,
+            "type": "minecraft:set_count"
+          },
+          "name": "tide:fishy_note"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

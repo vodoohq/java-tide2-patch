@@ -77,7 +77,7 @@ public record ClientFishingRodTooltip(int slots, BaitContents contents) implemen
         public void renderImage(@NotNull Font font, int x, int y, @NotNull GuiGraphics graphics) {
                 int gridWidth = this.gridWidth();
         
-                graphics.drawString(font, MESSAGE, x, y, DyeColor.LIGHT_GRAY.getTextColor());
+                graphics.text(font, MESSAGE, x, y, DyeColor.LIGHT_GRAY.getTextColor());
         
                 for (int i = 0; i < gridWidth; i++) {
                 int dspX = x + i * SLOT_SIZE_X + BG_BORDER;
@@ -102,25 +102,25 @@ public record ClientFishingRodTooltip(int slots, BaitContents contents) implemen
         //?} elif >=1.21 {
         /*
         private void renderSlot(int x, int y, int index, GuiGraphics graphics, Font font) {
-                graphics.blitSprite(SLOT_BACKGROUND_SPRITE, x - 4 + BG_BORDER, y - 4 + BG_BORDER, 24, 24);
+                graphics.blitSprite(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, SLOT_BACKGROUND_SPRITE, x - 4 + BG_BORDER, y - 4 + BG_BORDER, 24, 24);
         
                 if (index >= this.contents.size()) return;
                 ItemStack stack = this.contents.items().get(index);
         
-                graphics.renderItem(stack, x + BG_BORDER, y + BG_BORDER, index);
-                graphics.renderItemDecorations(font, stack, x + BG_BORDER, y + BG_BORDER);
+                graphics.item(stack, x + BG_BORDER, y + BG_BORDER, index);
+                graphics.itemDecorations(font, stack, x + BG_BORDER, y + BG_BORDER);
         }
         */
         //?} else {
         /*
         private void renderSlot(int x, int y, int index, GuiGraphics graphics, Font font) {
-                graphics.blit(SLOT_BACKGROUND_SPRITE, x - 4 + BG_BORDER, y - 4 + BG_BORDER, 0, 0, 24, 24, 24, 24);
+                graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, SLOT_BACKGROUND_SPRITE, x - 4 + BG_BORDER, y - 4 + BG_BORDER, 0, 0, 24, 24, 24, 24);
         
                 if (index >= this.contents.size()) return;
                 ItemStack stack = this.contents.items().get(index);
         
-                graphics.renderItem(stack, x + BG_BORDER, y + BG_BORDER, index);
-                graphics.renderItemDecorations(font, stack, x + BG_BORDER, y + BG_BORDER);
+                graphics.item(stack, x + BG_BORDER, y + BG_BORDER, index);
+                graphics.itemDecorations(font, stack, x + BG_BORDER, y + BG_BORDER);
         }
         */
         //?}

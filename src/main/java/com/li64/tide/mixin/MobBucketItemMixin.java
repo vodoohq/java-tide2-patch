@@ -27,7 +27,7 @@ public abstract class MobBucketItemMixin {
     *///?}
 
     @Inject(method = "checkExtraContent", at = @At("HEAD"))
-    private void spawn(Player player, Level level, ItemStack stack, BlockPos pos, CallbackInfo ci) {
+    private void spawn(net.minecraft.world.entity.LivingEntity player, Level level, ItemStack stack, BlockPos pos, CallbackInfo ci) {
         if (player instanceof ServerPlayer serverPlayer) {
             /*? if forge*//*EntityType<?> type = entityTypeSupplier.get();*/
             if (BuiltInRegistries.ENTITY_TYPE.getKey(type).getPath().equals("devils_hole_pupfish"))

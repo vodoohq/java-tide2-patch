@@ -143,7 +143,7 @@ public record FishDisplayRenderer(
                 poseStack.pushPose();
 
                 poseStack.translate(0.5f, 0.5f, 0.5f);
-                poseStack.mulPose(
+                poseStack.rotate(
                         Axis.YP.rotationDegrees(-state.facing.toYRot() + 90)
                 );
                 poseStack.translate(0.5f, 0.0f, 0.0f);
@@ -155,13 +155,13 @@ public record FishDisplayRenderer(
                         state.displayData.x()
                 );
 
-                poseStack.mulPose(
+                poseStack.rotate(
                         Axis.ZP.rotationDegrees(state.displayData.roll() + 90f)
                 );
-                poseStack.mulPose(
+                poseStack.rotate(
                         Axis.XP.rotationDegrees(state.displayData.pitch())
                 );
-                poseStack.mulPose(
+                poseStack.rotate(
                         Axis.YP.rotationDegrees(state.displayData.yaw())
                 );
 
@@ -210,16 +210,16 @@ public record FishDisplayRenderer(EntityRenderDispatcher entityRenderer) impleme
 
         Direction dir = display.getBlockState().getValue(FishDisplayBlock.FACING);
         poseStack.translate(0.5f, 0.5f, 0.5f); // center rotation
-        poseStack.mulPose(Axis.YP.rotationDegrees(-dir.toYRot() + 90)); // rotate based on facing direction
+        poseStack.rotate(Axis.YP.rotationDegrees(-dir.toYRot() + 90)); // rotate based on facing direction
         poseStack.translate(0.5f, 0.0f, 0.0f); // move towards display
         poseStack.pushPose();
 
         // apply translations
         poseStack.translate(-displayData.z(), displayData.y(), displayData.x());
         // apply rotations
-        poseStack.mulPose(Axis.ZP.rotationDegrees(displayData.roll() + 90f));
-        poseStack.mulPose(Axis.XP.rotationDegrees(displayData.pitch()));
-        poseStack.mulPose(Axis.YP.rotationDegrees(displayData.yaw()));
+        poseStack.rotate(Axis.ZP.rotationDegrees(displayData.roll() + 90f));
+        poseStack.rotate(Axis.XP.rotationDegrees(displayData.pitch()));
+        poseStack.rotate(Axis.YP.rotationDegrees(displayData.yaw()));
 
         EntityType<?> entityType = displayData.entityType();
         if (entityType == null) {

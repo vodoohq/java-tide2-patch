@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "tide-port-tests",
+  "version": "1.0.0",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": ["com.li64.tide.test.TidePortGameTests"],
+    "fabric-client-gametest": ["com.li64.tide.test.TidePortClientTests"]
+  }
+}

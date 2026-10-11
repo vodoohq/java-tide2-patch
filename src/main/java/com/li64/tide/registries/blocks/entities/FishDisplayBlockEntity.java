@@ -8,6 +8,8 @@ import com.li64.tide.registries.blocks.FishDisplayBlock;
 import com.li64.tide.registries.blocks.FishDisplayShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -88,27 +90,42 @@ public class FishDisplayBlockEntity extends BlockEntity {
 
     //? if >=1.21 {
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
-        if (this.fish != null) tag.put("fish", this.fish.save(registries));
+    protected void saveAdditional(@NotNull ValueOutput output) {
+        super.saveAdditional(output);
+        if (fish != null) output.store("fish", ItemStack.CODEC, fish);
     }
 
     @Override
-    protected void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
-        if (tag.contains("fish")) ItemStack.parse(registries, tag.get("fish")).ifPresent(this::setDisplayStack);
-        else {
-            this.fish = null;
-            this.displayData = null;
-            this.renderedEntity = null;
-            this.lengthCm = 0;
-            this.baseLengthCm = 0;
-        }
+    protected void loadAdditional(@NotNull ValueInput input) {
+        super.loadAdditional(input);
+        fish = null;
+        displayData = null;
+        renderedEntity = null;
+        lengthCm = baseLengthCm = 0;
+        input.read("fish", ItemStack.CODEC).ifPresent(stack -> {
+            var data = FishData.getExact(stack);
+            var display = data.flatMap(FishData::display);
+            if (data.isPresent() && display.isPresent()) {
+                fish = stack;
+                displayData = display.get();
+                baseLengthCm = data.get().getAverageLength();
+                lengthCm = TideItemData.FISH_LENGTH.getOrDefault(stack, baseLengthCm);
+            }
+        });
     }
 
     @Override
     public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider registries) {
-        CompoundTag tag = new CompoundTag();
-        saveAdditional(tag, registries);
-        return tag;
+        return saveWithoutMetadata(registries);
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        if (level != null && !level.isClientSide() && fish != null && !fish.isEmpty()) {
+            net.minecraft.world.level.block.Block.popResource(level, pos, fish);
+            fish = null;
+        }
+        super.preRemoveSideEffects(pos, state);
     }
 
     //?} else {

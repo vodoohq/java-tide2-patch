@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#c:slime_balls",
+    "#minecraft:planks",
+    "minecraft:feather"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:feather_bobber"
+  }
+}

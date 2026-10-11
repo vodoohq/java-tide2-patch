@@ -187,13 +187,13 @@ public record FishData(/*? if >=1.21 {*/ Holder<Item> fish,
 
     //? if <1.21 {
     /*public Holder<Item> fish() {
-        return BuiltInRegistries.ITEM.getHolder(fishKey)
+        return BuiltInRegistries.ITEM.get(fishKey)
                 .orElseThrow(() -> new IllegalStateException("could not find item " + fishKey));
     }
 
     @Override
     public boolean isValid() {
-        return BuiltInRegistries.ITEM.getHolder(fishKey).isPresent() && ModAssociatedEntry.super.isValid();
+        return BuiltInRegistries.ITEM.get(fishKey).isPresent() && ModAssociatedEntry.super.isValid();
     }
 
     @Override
@@ -292,7 +292,7 @@ public record FishData(/*? if >=1.21 {*/ Holder<Item> fish,
 
         public Builder fish(String namespace, String path) {
             ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Tide.resource(namespace, path));
-            this.fish = Holder.Reference.createStandAlone(BuiltInRegistries.ITEM.holderOwner(), key);
+            this.fish = Holder.Reference.createStandAlone(BuiltInRegistries.ITEM, key);
             return this.journalDescription("journal.description." + namespace + "." + path);
         }
 
@@ -443,7 +443,7 @@ public record FishData(/*? if >=1.21 {*/ Holder<Item> fish,
                     //?}
                 builder.entityType(ResourceKey.create(Registries.ENTITY_TYPE, id));
             }
-            else builder.entityType(BuiltInRegistries.ENTITY_TYPE.get(TideUtils.holderId(this.fish)));
+            else builder.entityType(BuiltInRegistries.ENTITY_TYPE.getValue(TideUtils.holderId(this.fish)));
             modifiers.accept(builder);
             this.display = builder.build();
             return this;

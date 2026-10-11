@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "tide:sun_emblem"
+  ],
+  "result": {
+    "count": 8,
+    "id": "tide:jelly_torch"
+  }
+}

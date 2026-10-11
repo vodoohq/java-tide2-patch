@@ -1,0 +1,41 @@
+{
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    },
+    {
+      "type": "tide:fluid",
+      "fluid": "water"
+    },
+    {
+      "type": "tide:above",
+      "y": 40
+    },
+    {
+      "type": "tide:found_in",
+      "biomes": [
+        "#stardew_fishing:has_arid_fish"
+      ]
+    }
+  ],
+  "fish": "stardew_fishing:sabretoothed_tigerfish",
+  "journal_profile": {
+    "description": "journal.description.stardew_fishing.sabretoothed_tigerfish",
+    "group": "freshwater",
+    "location": "journal.info.location.desert",
+    "rarity": "legendary"
+  },
+  "selection_quality": 0.5,
+  "selection_weight": 2,
+  "size": {
+    "record_high_cm": 140,
+    "typical_high_cm": 85,
+    "typical_low_cm": 55
+  },
+  "associated_mods": [
+    "stardew_fishing"
+  ]
+}

@@ -24,7 +24,7 @@ public class TideStarcatcherMinigameScreen extends FishingMinigameScreen {
                 .filter(AbstractMinigameModifier.class::isInstance)
                 .map(AbstractMinigameModifier.class::cast)
                 .toList();
-        Minecraft.getInstance().setScreen(new TideStarcatcherMinigameScreen(message.properties(), modifiers));
+        Minecraft.getInstance().setScreenAndShow(new TideStarcatcherMinigameScreen(message.properties(), modifiers));
     }
 
     @Override

@@ -44,19 +44,19 @@ public class TidePlayerData {
     }
 
     public TidePlayerData(CompoundTag tag) {
-        this.gotJournal = tag.getBoolean("got_journal");
+        this.gotJournal = tag.getBooleanOr("got_journal", false);
 
         // parse fish data tag
-        ListTag fishList = tag.getList("fish_data", 10);
+        ListTag fishList = tag.getListOrEmpty("fish_data");
         this.fishPlayerData = new HashMap<>(fishList.size());
         fishList.forEach(t -> {
             if (!(t instanceof CompoundTag fishTag) || !fishTag.contains("fish")) return;
-            Holder<Item> item = BuiltInRegistries.ITEM.wrapAsHolder(BuiltInRegistries.ITEM.get(
+            Holder<Item> item = BuiltInRegistries.ITEM.wrapAsHolder(BuiltInRegistries.ITEM.getValue(
                     //? if >=26.2 {
-                    Identifier.tryParse(fishTag.getString("fish"))));
+                    Identifier.tryParse(fishTag.getStringOr("fish", ""))));
                     //?} else {
                     /*
-                    ResourceLocation.tryParse(fishTag.getString("fish"))));
+                    ResourceLocation.tryParse(fishTag.getStringOr("fish", ""))));
                     */
                     //?}
             fishPlayerData.put(item, FishPlayerData.readFrom(fishTag, "data").orElse(new FishPlayerData()));
@@ -69,7 +69,7 @@ public class TidePlayerData {
 
     public static TidePlayerData getOrCreate(CompoundTag tag) {
         if (!tag.contains(NBT_TAG)) tag.put(NBT_TAG, new CompoundTag());
-        return new TidePlayerData(tag.getCompound(NBT_TAG));
+        return new TidePlayerData(tag.getCompoundOrEmpty(NBT_TAG));
     }
 
     public CompoundTag getAsTag() {
@@ -130,19 +130,19 @@ public class TidePlayerData {
     }
 
     public void markAsRead(ItemStack stack) {
-        Holder<Item> fish = stack.getItemHolder();
+        Holder<Item> fish = stack.typeHolder();
         if (!fishPlayerData.containsKey(fish)) return;
         fishPlayerData.get(fish).isUnread = false;
     }
 
     public boolean isUnread(ItemStack stack) {
-        Holder<Item> fish = stack.getItemHolder();
+        Holder<Item> fish = stack.typeHolder();
         if (!fishPlayerData.containsKey(fish)) return false;
         return fishPlayerData.get(fish).isUnread;
     }
 
     public boolean hasNote(ItemStack stack) {
-        Holder<Item> fish = stack.getItemHolder();
+        Holder<Item> fish = stack.typeHolder();
         if (!fishPlayerData.containsKey(fish)) return false;
         return fishPlayerData.get(fish).hasNote;
     }
@@ -162,11 +162,11 @@ public class TidePlayerData {
             if (TideItemData.FISH_LENGTH.isPresent(stack))
                 fishLength = TideItemData.FISH_LENGTH.getOrDefault(stack, 0.0);
             else if (Tide.SERVER_CONFIG.items.fishItemSizes == TideServerConfig.Items.SizeMode.IN_JOURNAL)
-                fishLength = data.getRandomLength(level.random);
+                fishLength = data.getRandomLength(level.getRandom());
             stats.logCatch(CatchTimestamp.now(level), fishLength);
         }
 
-        if (playerData == null) fishPlayerData.put(stack.getItemHolder(), new FishPlayerData(stats));
+        if (playerData == null) fishPlayerData.put(stack.typeHolder(), new FishPlayerData(stats));
         else fishPlayerData.get(fish).stats = Optional.of(stats);
     }
 

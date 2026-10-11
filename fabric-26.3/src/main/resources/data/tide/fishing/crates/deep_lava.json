@@ -1,0 +1,27 @@
+{
+  "block": {
+    "id": "tide:obsidian_crate",
+    "properties": {
+      "facing": "north",
+      "open": "false"
+    }
+  },
+  "conditions": [
+    {
+      "type": "tide:fluid",
+      "fluid": "lava"
+    },
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    },
+    {
+      "type": "tide:below",
+      "y": 0
+    }
+  ],
+  "loot_table": "tide:chests/crates/deep_lava",
+  "weight": 1
+}

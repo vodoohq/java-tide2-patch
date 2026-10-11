@@ -1,0 +1,58 @@
+name: Build and test Fabric 26.3
+on:
+  push:
+    branches: [voodoo/26.3-port]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v6
+      - name: Build and server GameTests
+        run: bash gradlew build :fabric-26.3:runGameTest --console=plain
+      - name: Client GameTests
+        run: xvfb-run -a bash gradlew :fabric-26.3:runClientGameTest --console=plain
+      - name: Build distributable packs
+        run: node scripts/build-pack.mjs
+      - uses: actions/upload-artifact@v7
+        with:
+          name: tide-fabric-26.3
+          path: build/release/*
+      - name: Upload screenshots and test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-evidence
+          path: |
+            fabric-26.3/build/run/clientGameTest/screenshots/
+            fabric-26.3/build/reports/
+          if-no-files-found: ignore
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: tide-fabric-26.3
+          path: build/release
+      - name: Publish alpha assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release create "$GITHUB_REF_NAME" --prerelease --title "Tide 2 Fabric 26.3 — Voodoo alpha" --notes-file RELEASE-NOTES.md
+          fi
+          gh release upload "$GITHUB_REF_NAME" build/release/* --clobber

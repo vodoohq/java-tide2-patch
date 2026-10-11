@@ -135,10 +135,6 @@ public class CatchMinigameOverlay {
 
         int x = (graphics.guiWidth() - texWidth) / 2;
         int y = graphics.guiHeight() / 2 - 18;
-
-        graphics.flush();
-        RenderSystem.enableBlend();
-        RenderSystem.setShaderColor(1f, 1f, 1f, alpha);
         //? if >=26.2 {
         Identifier fillSprite = type == 1 ? FILL_LAVA : (type == 2 ? FILL_VOID : FILL_WATER);
         //?} else {
@@ -147,14 +143,14 @@ public class CatchMinigameOverlay {
         */
         //?}
 
-        graphics.blit(BAR_BG, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
-        /*? if >=1.21 {*/graphics.blitSprite(fillSprite, x + offset, y, texWidth - offset * 2, texHeight);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BAR_BG, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight, net.minecraft.util.ARGB.white(alpha));
+        /*? if >=1.21 {*/graphics.blitSprite(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, fillSprite, x + offset, y, texWidth - offset * 2, texHeight, net.minecraft.util.ARGB.white(alpha));
         //?} else {
         /*TideUtils.blitNineSliced(graphics, fillSprite, x + offset, y,
                 texWidth - offset * 2, texHeight, 2, 2, 2, 4,
                 6, 7, 0, 0, 6, 7);
         *///?}
-        graphics.blit(BAR_OVERLAY, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BAR_OVERLAY, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight, net.minecraft.util.ARGB.white(alpha));
 
         int markerX = Math.round((x + texWidth / 2f - 2) + getMinigamePosition() * (texWidth / 2f - 2));
         //? if >=26.2 {
@@ -164,21 +160,17 @@ public class CatchMinigameOverlay {
         ResourceLocation markerTexture = timer % 4 < 2 ? MARKER : SELECT;
         */
         //?}
-        graphics.blit(markerTexture, markerX, y - 1, 0, 0, 4, 9, 4, 9);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, markerTexture, markerX, y - 1, 0, 0, 4, 9, 4, 9, net.minecraft.util.ARGB.white(alpha));
 
         if (Tide.CLIENT_CONFIG.minigame.doFeedback && accuracyText != null) {
             Font font = Minecraft.getInstance().font;
             if (alpha >= 0.03f) {
-                graphics.drawString(font,
+                graphics.text(font,
                         accuracyText.withStyle(accuracyText.getStyle().withColor(textColor)),
                         (graphics.guiWidth() - font.width(accuracyText)) / 2, y - 10,
-                        0xffffff, false);
+                        net.minecraft.util.ARGB.white(alpha), false);
             }
         }
-
-        graphics.flush();
-        RenderSystem.disableBlend();
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
     }
 
     private static float getMinigamePosition() {

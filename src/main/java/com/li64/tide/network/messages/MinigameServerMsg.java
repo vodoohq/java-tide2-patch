@@ -32,6 +32,8 @@ public record MinigameServerMsg(byte event) implements TidePacketPayload {
     }
 
     public static void handle(MinigameServerMsg message, Player player) {
+        // The close packet may arrive after the hook was removed or the cast cancelled.
+        if (com.li64.tide.registries.entities.misc.fishing.HookAccessor.getHook(player) == null) return;
         FishCatchMinigame minigame = FishCatchMinigame.create(player);
         minigame.handleClientEvent(message.event);
     }

@@ -120,12 +120,12 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
                 poseStack.pushPose();
 
                 poseStack.translate((1f / 16f) / 2f, 0, (1f / 16f) / 2f);
-                poseStack.mulPose(Axis.YP.rotationDegrees(180f - state.initialYaw));
+                poseStack.rotate(Axis.YP.rotationDegrees(180f - state.initialYaw));
 
                 poseStack.scale(-1.0F, -1.0F, 1.0F);
                 
                 model.setupAnim(state);
-                collector.submitModel(model, state, poseStack, HOOK_RENDER_TYPE, state.lightCoords, OverlayTexture.NO_OVERLAY, ARGB.color(255, 255, 255, 255), null, 0, null);
+                collector.submitModel(model, state, poseStack, HOOK_RENDER_TYPE, state.lightCoords, OverlayTexture.NO_OVERLAY, ARGB.color(255, 255, 255, 255), null, 0);
 
                 bobberLayer.submit(poseStack, collector, state.lightCoords, state, 0f, 0f);
 
@@ -139,7 +139,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
         private void submitConnectingString(TideFishingHookRenderState state, PoseStack poseStack, SubmitNodeCollector collector) {
                 Player player = state.player;
                 float partialTick = state.partialTick;
-                float attackAnim = player.getAttackAnim(partialTick);
+                float attackAnim = player.getSwingAnimation(partialTick);
                 float attackAnimMod = Mth.sin(Mth.sqrt(attackAnim) * (float) Math.PI);
                 Vec3 handPos = this.getPlayerHandPos(player, attackAnimMod, partialTick);
                 Vec3 posDif = state.position.add(0.0, 0.25, 0.0);
@@ -148,15 +148,11 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
                 float posZ = (float)(handPos.z - posDif.z);
 
                 collector.submitCustomGeometry(poseStack, LINE_RENDER_TYPE, (pose, vertexConsumer) -> {
-                        for (int k = 0; k <= 16; k++) {
+                        for (int k = 0; k < 16; k++) {
                                 stringVertex(posX, posY, posZ, vertexConsumer, pose, fraction(k), fraction(k + 1), player, FishingLineItem.getColor(state.line), partialTick);
+                                stringVertex(posX, posY, posZ, vertexConsumer, pose, fraction(k + 1), fraction(k), player, FishingLineItem.getColor(state.line), partialTick);
                         }
 
-                        if (Tide.PLATFORM.isModLoaded("iris") || Tide.PLATFORM.isModLoaded("oculus")) {
-                                vertexConsumer.addVertex(0, 0, 0)
-                                        .setColor(0, 0, 0, 255)
-                                        .setNormal(0, 0, 0);
-                        }
                 });
         }
         //?} elif >= 1.21 {
@@ -170,7 +166,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
                 poseStack.pushPose();
         
                 poseStack.translate((1f / 16f) / 2f, 0, (1f / 16f) / 2f);
-                poseStack.mulPose(Axis.YP.rotationDegrees(180f - hookEntity.getInitialYaw()));
+                poseStack.rotate(Axis.YP.rotationDegrees(180f - hookEntity.getInitialYaw()));
         
                 poseStack.scale(-1.0F, -1.0F, 1.0F);
         
@@ -190,7 +186,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
         }
         
         private void renderConnectingString(TideFishingHook hookEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, Player player) {
-                float f = player.getAttackAnim(partialTick);
+                float f = player.getSwingAnimation(partialTick);
                 float f1 = Mth.sin(Mth.sqrt(f) * (float) Math.PI);
                 Vec3 vec3 = this.getPlayerHandPos(player, f1, partialTick);
                 Vec3 vec31 = hookEntity.getPosition(partialTick).add(0.0, 0.25, 0.0);
@@ -225,7 +221,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
                 poseStack.pushPose();
         
                 poseStack.translate((1f / 16f) / 2f, 0, (1f / 16f) / 2f);
-                poseStack.mulPose(Axis.YP.rotationDegrees(180f - hookEntity.getInitialYaw()));
+                poseStack.rotate(Axis.YP.rotationDegrees(180f - hookEntity.getInitialYaw()));
         
                 poseStack.scale(-1.0F, -1.0F, 1.0F);
         
@@ -246,7 +242,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
         }
         
         private void renderConnectingString(TideFishingHook hookEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, Player player) {
-                float f = player.getAttackAnim(partialTick);
+                float f = player.getSwingAnimation(partialTick);
                 float f1 = Mth.sin(Mth.sqrt(f) * (float) Math.PI);
                 Vec3 vec3 = this.getPlayerHandPos(player, f1, partialTick);
                 Vec3 vec31 = hookEntity.getPosition(partialTick).add(0.0, 0.25, 0.0);
@@ -339,7 +335,8 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
                 //? if >= 26.2 {
                 vertexConsumer.addVertex(pose.pose(), f, f1, f2)
                         .setColor(ARGB.color(255, r, g, b))
-                        .setNormal(pose, f3, f4, f5);
+                        .setNormal(pose, f3, f4, f5)
+                        .setLineWidth(3.0F);
                 //?} elif >=1.21 {
                 /*
                 vertexConsumer.addVertex(pose.pose(), f, f1, f2)

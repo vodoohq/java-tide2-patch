@@ -28,7 +28,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 //? if >=26.2 {
-import com.li64.tide.mixin.ItemFeatureRendererMixin;
+import com.li64.tide.client.TideSilhouetteRenderer;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.input.KeyEvent;
@@ -339,7 +339,7 @@ public class FishingJournal extends Screen {
         if (activeNote == null) graphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, tlX, tlY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT, ARGB.white(1f));
         //?} else {
         /*
-        if (activeNote == null) graphics.blit(BACKGROUND, tlX, tlY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
+        if (activeNote == null) graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BACKGROUND, tlX, tlY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
         */
         //?}
         
@@ -450,20 +450,19 @@ public class FishingJournal extends Screen {
                         //? if >=26.2 {
                         if (isUnlocked) {
                                 graphics.item(stack, x, y);
-                        }
-                        else {
-                                graphics.item(stack, x, y);
+                        } else {
+                                renderItemSilhouette(graphics, stack, x, y, 0xff000000);
                         }
                         //?} else {
                         /*
                         graphics.flush();
                         if (isUnlocked) {
                                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-                                graphics.renderItem(stack, x, y);
+                                graphics.item(stack, x, y);
                         }
                         else {
                                 RenderSystem.setShaderColor(0f, 0f, 0f, 1f);
-                                graphics.renderItem(stack, x, y);
+                                graphics.item(stack, x, y);
                                 graphics.flush();
                                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
                         }
@@ -482,9 +481,9 @@ public class FishingJournal extends Screen {
                                 /*
                                 graphics.pose().pushPose();
                                 graphics.pose().translate(0f, 0f, 200f);
-                                if (isHovering) graphics.blit(FISHY_NOTE_ICON_SELECTED, x -2, y - 2,
+                                if (isHovering) graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, FISHY_NOTE_ICON_SELECTED, x -2, y - 2,
                                         0f, 0f, 9, 9, 9, 9);
-                                else graphics.blit(FISHY_NOTE_ICON, x - 2, y - 2,
+                                else graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, FISHY_NOTE_ICON, x - 2, y - 2,
                                         0f, 0f, 9, 9, 9, 9);
                                 graphics.pose().popPose();
                                 */
@@ -502,7 +501,7 @@ public class FishingJournal extends Screen {
                                 //? if >=26.2 {
                         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, LINE_BOTTOM, tlX + 40, tlY + 36 + cursorY - GROUP_SPACING / 2, 327, 2);
                                 //?} else {
-                        /*graphics.blitSprite(LINE_BOTTOM, tlX + 40, tlY + 36 + cursorY - GROUP_SPACING / 2, 327, 2);*/
+                        /*graphics.blitSprite(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, LINE_BOTTOM, tlX + 40, tlY + 36 + cursorY - GROUP_SPACING / 2, 327, 2);*/
                                 //?}
                         //?} else {
                         /*TideUtils.blitNineSliced(graphics, LINE_BOTTOM, tlX + 40,
@@ -546,7 +545,7 @@ public class FishingJournal extends Screen {
         
         //? if >=26.2 {
         public static void renderTextureSilhouette(GuiGraphicsExtractor graphics, Identifier texture, int x, int y, int w, int h) {
-                graphics.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, 0, 0, w, h, w, h, ARGB.white(1f));
+                graphics.blit(TideSilhouetteRenderer.PIPELINE, texture, x, y, 0, 0, w, h, w, h, ARGB.white(1f));
         }
         //?} else {
         /*
@@ -577,26 +576,7 @@ public class FishingJournal extends Screen {
         
         //? if >=26.2 {
         public static void renderItemSilhouette(GuiGraphicsExtractor graphics, ItemStack stack, int x, int y, int color) {
-                Minecraft minecraft = Minecraft.getInstance();
-                ItemModelResolver resolver = minecraft.getItemModelResolver();
-                ItemStackRenderState state = new ItemStackRenderState();
-                resolver.updateForTopItem(state, stack, ItemDisplayContext.GUI, minecraft.level, null, 0);
-
-                if (state.isEmpty()) return;
-
-                PoseStack poseStack = new PoseStack();
-                poseStack.pushPose();
-                poseStack.translate(x + 8f, y + 8f, 150f);
-                poseStack.scale(16.0f, -16.0f, 16.0f);
-                poseStack.translate(-0.5f, -0.5f, -0.5f);
-
-                SubmitNodeStorage storage = new SubmitNodeStorage();
-                ItemFeatureRendererMixin.pushSilhouetteColor(color);
-                try {
-                        state.submit(poseStack, storage, LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 0);
-                } finally {
-                        ItemFeatureRendererMixin.popSilhouetteColor();
-                }
+                TideSilhouetteRenderer.item(graphics, stack, x, y, color);
         }
         //?} else {
         /*

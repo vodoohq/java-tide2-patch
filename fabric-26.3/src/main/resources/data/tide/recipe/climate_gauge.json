@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#c:glass_blocks/colorless",
+    "I": "#c:nuggets/iron",
+    "R": "#c:dusts/redstone"
+  },
+  "pattern": [
+    " # ",
+    "#I#",
+    "#R#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:climate_gauge"
+  }
+}

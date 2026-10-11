@@ -50,7 +50,7 @@ public class WeatherComponent extends ProfileComponent {
         graphics.text(font, TITLE, center - font.width(TITLE) / 2, y, TEXT_COLOR, false);
         //?} else {
         /*
-        graphics.drawString(font, TITLE, center - font.width(TITLE) / 2, y, TEXT_COLOR, false);
+        graphics.text(font, TITLE, center - font.width(TITLE) / 2, y, TEXT_COLOR, false);
         */
         //?}
 
@@ -67,7 +67,7 @@ public class WeatherComponent extends ProfileComponent {
             graphics.blit(RenderPipelines.GUI_TEXTURED, ICONS, spriteX, spriteY, offset, 0, 10, 10, 30, 10, ARGB.white(1f));
             //?} else {
             /*
-            graphics.blit(ICONS, spriteX, spriteY, offset, 0, 10, 10, 30, 10);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, ICONS, spriteX, spriteY, offset, 0, 10, 10, 30, 10);
             */
             //?}
 

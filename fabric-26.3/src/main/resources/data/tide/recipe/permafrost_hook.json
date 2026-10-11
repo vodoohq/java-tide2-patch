@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "minecraft:blue_ice",
+    "I": "#c:ingots/iron"
+  },
+  "pattern": [
+    "  #",
+    "I I",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:permafrost_hook"
+  }
+}

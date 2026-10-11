@@ -45,7 +45,7 @@ public record CrateData(BlockStateProvider blockProvider,
                         double weight, double quality) implements FishingEntry, ModAssociatedEntry {
 
     public static final Codec<CrateData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            BlockStateProvider.CODEC.fieldOf("block").forGetter(CrateData::blockProvider),
+            BlockStateProvider.DIRECT_CODEC.fieldOf("block").forGetter(CrateData::blockProvider),
             /*? if >= 1.21 {*/ResourceKey.codec(Registries.LOOT_TABLE).optionalFieldOf("loot_table").forGetter(CrateData::lootTable),
             /*?} else {*//*ResourceLocation.CODEC.optionalFieldOf("loot_table").forGetter(CrateData::lootTable),*//*?}*/
             Codec.STRING.listOf().optionalFieldOf("associated_mods", List.of()).forGetter(CrateData::associatedMods),
@@ -110,7 +110,7 @@ public record CrateData(BlockStateProvider blockProvider,
         private Builder() {}
 
         public Builder block(Block block) {
-            this.block = BlockStateProvider.simple(block);
+            this.block = BlockStateProvider.of(block);
             return this;
         }
 

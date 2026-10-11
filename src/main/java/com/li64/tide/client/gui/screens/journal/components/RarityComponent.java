@@ -50,7 +50,7 @@ public class RarityComponent extends ProfileComponent {
             graphics.blit(RenderPipelines.GUI_TEXTURED, STAR, center - ((numStars - 1) * cellSize / 2) + (i * cellSize) - 4, y, 0, 0, 7, 6, 7, 6, ARGB.white(1f));
             //?} else {
             /*
-            graphics.blit(STAR, center - ((numStars - 1) * cellSize / 2) + (i * cellSize) - 4, y, 0, 0, 7, 6, 7, 6);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, STAR, center - ((numStars - 1) * cellSize / 2) + (i * cellSize) - 4, y, 0, 0, 7, 6, 7, 6);
             */
             //?}
         }

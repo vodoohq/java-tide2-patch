@@ -87,13 +87,13 @@ public class StarArrowRenderer extends EntityRenderer<StarArrow> {
                 super.submit(state, poseStack, collector, camera);
                 poseStack.pushPose();
                 poseStack.translate(0, 0.25, 0);
-                poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(state.partialTick, state.yRotO, state.yRot) - 90f));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(state.partialTick, state.xRotO, state.xRot)));
+                poseStack.rotate(Axis.YP.rotationDegrees(Mth.lerp(state.partialTick, state.yRotO, state.yRot) - 90f));
+                poseStack.rotate(Axis.ZP.rotationDegrees(Mth.lerp(state.partialTick, state.xRotO, state.xRot)));
                 poseStack.scale(1, -1, 1);
                 poseStack.translate(0, -1.28, 0);
                 collector.submitModel(model, state, poseStack, RENDER_TYPE, 
                         LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 
-                        ARGB.color(255, 255, 255, 255), null, 0, null);
+                        ARGB.color(255, 255, 255, 255), null, 0);
                 poseStack.popPose();
         }
         //?} elif >= 1.21 {
@@ -107,8 +107,8 @@ public class StarArrowRenderer extends EntityRenderer<StarArrow> {
                 super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
                 poseStack.pushPose();
                 poseStack.translate(0, 0.25, 0);
-                poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTick, entity.yRotO, entity.getYRot()) - 90f));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, entity.xRotO, entity.getXRot())));
+                poseStack.rotate(Axis.YP.rotationDegrees(Mth.lerp(partialTick, entity.yRotO, entity.getYRot()) - 90f));
+                poseStack.rotate(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, entity.xRotO, entity.getXRot())));
                 poseStack.scale(1, -1, 1);
                 poseStack.translate(0, -1.28, 0);
                 VertexConsumer buffer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(entity)));
@@ -127,8 +127,8 @@ public class StarArrowRenderer extends EntityRenderer<StarArrow> {
                 super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
                 poseStack.pushPose();
                 poseStack.translate(0, 0.25, 0);
-                poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTick, entity.yRotO, entity.getYRot()) - 90f));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, entity.xRotO, entity.getXRot())));
+                poseStack.rotate(Axis.YP.rotationDegrees(Mth.lerp(partialTick, entity.yRotO, entity.getYRot()) - 90f));
+                poseStack.rotate(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, entity.xRotO, entity.getXRot())));
                 poseStack.scale(1, -1, 1);
                 poseStack.translate(0, -1.28, 0);
                 VertexConsumer buffer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(entity)));

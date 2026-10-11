@@ -33,7 +33,7 @@ public class LocationComponent extends ProfileComponent {
         graphics.text(font, text, center - font.width(text) / 2, y, TEXT_COLOR, false);
         //?} else {
         /*
-        graphics.drawString(font, text, center - font.width(text) / 2, y, TEXT_COLOR, false);
+        graphics.text(font, text, center - font.width(text) / 2, y, TEXT_COLOR, false);
         */
         //?}
     }

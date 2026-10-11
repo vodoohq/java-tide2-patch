@@ -1,0 +1,53 @@
+{
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    },
+    {
+      "type": "tide:fluid",
+      "fluid": "water"
+    },
+    {
+      "type": "tide:above",
+      "y": 40
+    },
+    {
+      "type": "tide:freshwater"
+    }
+  ],
+  "display_data": {
+    "entity": "hybrid_aquatic:golden_dorado",
+    "roll": -90,
+    "x": 0.06,
+    "y": -0.2,
+    "z": 0.08
+  },
+  "fish": "hybrid_aquatic:golden_dorado",
+  "journal_profile": {
+    "description": "journal.description.hybrid_aquatic.golden_dorado",
+    "group": "freshwater",
+    "location": "journal.info.location.freshwater",
+    "rarity": "rare"
+  },
+  "modifiers": [
+    {
+      "type": "tide:temperature",
+      "preferred_temperature": 0.6,
+      "temperature_tolerance": 0.45
+    }
+  ],
+  "selection_weight": 13,
+  "size": {
+    "record_high_cm": 140,
+    "typical_high_cm": 80,
+    "typical_low_cm": 50
+  },
+  "speed": 1.1,
+  "strength": 0.7,
+  "associated_mods": [
+    "hybrid_aquatic"
+  ]
+}

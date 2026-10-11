@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "tide:midas_fish",
+  "base": "tide:golden_fishing_rod",
+  "result": {
+    "count": 1,
+    "id": "tide:midas_fishing_rod"
+  },
+  "template": "#c:strings"
+}

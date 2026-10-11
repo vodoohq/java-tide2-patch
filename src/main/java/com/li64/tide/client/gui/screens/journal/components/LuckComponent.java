@@ -35,7 +35,7 @@ public class LuckComponent extends ProfileComponent {
     /*
     public void render(@NotNull GuiGraphics graphics, Font font, int x, int y, int mouseX, int mouseY, float partialTick) {
         int center = x + AREA_WIDTH / 2;
-        graphics.drawString(font, text, center - font.width(text) / 2, y, TEXT_COLOR, false);
+        graphics.text(font, text, center - font.width(text) / 2, y, TEXT_COLOR, false);
     */
     //?}
     }

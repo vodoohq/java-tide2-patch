@@ -57,7 +57,7 @@ import java.util.List;
                 return Integer.toString(phase.index());
                 //?} else {
                 /*
-                return Integer.toString(level.getMoonPhase());
+                return Integer.toString(level.environmentAttributes().getValue(net.minecraft.world.attribute.EnvironmentAttributes.MOON_PHASE).index());
                 */
                 //?}
         }

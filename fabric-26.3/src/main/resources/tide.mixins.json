@@ -1,0 +1,30 @@
+{
+  "package": "com.li64.tide.mixin",
+  "required": true,
+  "minVersion": "0.8",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "EntityRenderDispatcherMixin",
+    "GuiRenderMixin"
+  ],
+  "mixins": [
+    "AbstractFishMixin",
+    "BeehiveBlockMixin",
+    "CatMixin",
+    "HookPredicateMixin",
+    "InventoryMixin",
+    "ItemMixin",
+    "ItemsMixin",
+    "ItemStackMixin",
+    "LecternBlockMixin",
+    "LootContextParamSetsMixin",
+    "MobBucketItemMixin",
+    "MobMixin",
+    "PlayerMixin",
+    "ProjectileWeaponItemMixin",
+    "TidePlayerMixin"
+  ]
+}

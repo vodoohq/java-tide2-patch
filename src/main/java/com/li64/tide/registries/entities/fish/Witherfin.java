@@ -30,7 +30,7 @@ public class Witherfin extends TideSchoolingLavaFish {
 
     @Override
     public void playerTouch(Player player) {
-        if (player instanceof ServerPlayer && player.hurt(this.damageSources().noAggroMobAttack(this), 1f)) {
+        if (player instanceof ServerPlayer serverPlayer && player.hurtServer(serverPlayer.level(), this.damageSources().noAggroMobAttack(this), 1f)) {
             player.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0), this);
             this.playSound(SoundEvents.WITHER_SKELETON_AMBIENT, 1.0f, 1.0f);
         }

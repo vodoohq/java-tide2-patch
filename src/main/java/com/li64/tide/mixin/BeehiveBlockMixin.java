@@ -15,8 +15,11 @@ import java.util.Random;
 @Mixin(BeehiveBlock.class)
 public class BeehiveBlockMixin {
     @Inject(method = "dropHoneycomb", at = @At("TAIL"))
-    private static void dropHoneycomb(Level level, BlockPos pos, CallbackInfo ci) {
-        if (new Random().nextFloat() < 0.05f) BeehiveBlock.popResource(
+    private static void dropHoneycomb(net.minecraft.server.level.ServerLevel level, ItemStack tool,
+                                      net.minecraft.world.level.block.state.BlockState state,
+                                      net.minecraft.world.level.block.entity.BlockEntity blockEntity,
+                                      net.minecraft.world.entity.Entity user, BlockPos pos, CallbackInfo ci) {
+        if (level.getRandom().nextFloat() < 0.05f) BeehiveBlock.popResource(
                 level, pos, new ItemStack(TideItems.HONEYCOMB_FISHING_ROD));
     }
 }

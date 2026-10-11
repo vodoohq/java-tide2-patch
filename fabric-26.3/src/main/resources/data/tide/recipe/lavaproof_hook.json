@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#c:ingots/gold",
+    "O": "#c:obsidians"
+  },
+  "pattern": [
+    "  #",
+    "O O",
+    " O "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:lavaproof_hook"
+  }
+}

@@ -99,7 +99,7 @@ public class FishyNoteScreen extends Screen {
                 super.extractRenderState(graphics, mouseX, mouseY, partialTick);
                 int x = (graphics.guiWidth() - WIDTH) / 2;
                 int y = (graphics.guiHeight() - HEIGHT) / 2;
-                graphics.blit(BG, x, y, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
+                graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BG, x, y, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
         
                 // render "discovered" checkmark
                 if (discovered) {
@@ -127,11 +127,11 @@ public class FishyNoteScreen extends Screen {
                 }
                 int x = (graphics.guiWidth() - WIDTH) / 2;
                 int y = (graphics.guiHeight() - HEIGHT) / 2;
-                graphics.blit(BG, x, y, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
+                graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BG, x, y, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
         
                 // render "discovered" checkmark
                 if (discovered) {
-                graphics.blit(CHECKMARK, x + 18, y + 18, 0, 0,
+                graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, CHECKMARK, x + 18, y + 18, 0, 0,
                         16, 16, 16, 16);
                 }
         
@@ -159,11 +159,11 @@ public class FishyNoteScreen extends Screen {
                 }
                 int x = (graphics.guiWidth() - WIDTH) / 2;
                 int y = (graphics.guiHeight() - HEIGHT) / 2;
-                graphics.blit(BG, x, y, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
+                graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BG, x, y, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
         
                 // render "discovered" checkmark
                 if (discovered) {
-                graphics.blit(CHECKMARK, x + 18, y + 18, 0, 0,
+                graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, CHECKMARK, x + 18, y + 18, 0, 0,
                         16, 16, 16, 16);
                 }
         

@@ -83,7 +83,7 @@ public class TideSchoolingLavaFish extends TideLavaFish {
     @Override
     public void tick() {
         super.tick();
-        if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
+        if (this.hasFollowers() && this.level().getRandom().nextInt(200) == 1) {
             List<? extends TideLavaFish> list = this.level().getEntitiesOfClass(
                     (Class<? extends TideLavaFish>)this.getClass(),
                     this.getBoundingBox().inflate(8.0, 8.0, 8.0)

@@ -1,0 +1,44 @@
+{
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    },
+    {
+      "type": "tide:fluid",
+      "fluid": "water"
+    },
+    {
+      "type": "tide:above",
+      "y": 40
+    },
+    {
+      "type": "tide:freshwater"
+    }
+  ],
+  "display_data": {
+    "entity": "hybrid_aquatic:piranha",
+    "roll": -90,
+    "x": 0.02,
+    "y": -0.15,
+    "z": 0.08
+  },
+  "fish": "hybrid_aquatic:piranha",
+  "journal_profile": {
+    "description": "journal.description.hybrid_aquatic.piranha",
+    "group": "freshwater",
+    "location": "journal.info.location.freshwater"
+  },
+  "selection_weight": 30,
+  "size": {
+    "record_high_cm": 65,
+    "typical_high_cm": 45,
+    "typical_low_cm": 30
+  },
+  "strength": 0.5,
+  "associated_mods": [
+    "hybrid_aquatic"
+  ]
+}

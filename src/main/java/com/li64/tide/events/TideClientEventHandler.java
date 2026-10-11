@@ -36,8 +36,8 @@ public class TideClientEventHandler {
         //? if >=1.21 {
         else if (stack.has(DataComponents.BUCKET_ENTITY_DATA)) {
             CustomData data = stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY);
-            if (data.contains("Length")) {
-                double length = data.copyTag().getDouble("Length");
+            if (data.copyTag().contains("Length")) {
+                double length = data.copyTag().getDoubleOr("Length", 0.0);
                 lines.add(TideUtils.getFormattedLength(length).withStyle(ChatFormatting.BLUE));
             }
         }

@@ -1,0 +1,54 @@
+{
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    },
+    {
+      "type": "tide:fluid",
+      "fluid": "water"
+    },
+    {
+      "type": "tide:above",
+      "y": 40
+    },
+    {
+      "type": "tide:saltwater"
+    }
+  ],
+  "display_data": {
+    "entity": "hybrid_aquatic:ocean_sunfish",
+    "roll": -90,
+    "shape": "3x1",
+    "x": 0.35,
+    "y": -1,
+    "z": 0.08
+  },
+  "fish": "hybrid_aquatic:ocean_sunfish",
+  "journal_profile": {
+    "description": "journal.description.hybrid_aquatic.ocean_sunfish",
+    "group": "saltwater",
+    "location": "journal.info.location.saltwater",
+    "rarity": "rare"
+  },
+  "modifiers": [
+    {
+      "type": "tide:temperature",
+      "preferred_temperature": 0.35,
+      "temperature_tolerance": 0.5
+    }
+  ],
+  "selection_weight": 10,
+  "size": {
+    "record_high_cm": 135,
+    "typical_high_cm": 90,
+    "typical_low_cm": 75
+  },
+  "speed": 0.65,
+  "strength": 0.85,
+  "associated_mods": [
+    "hybrid_aquatic"
+  ]
+}

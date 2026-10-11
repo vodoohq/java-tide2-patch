@@ -124,10 +124,10 @@ public class TideFishEntity extends AbstractSchoolingFish {
                 ? TideUtils.findClosestNonWaterBiome(level.getLevel(), pos, 12, 3).orElse(biome) : biome;
 
         FishingContext context = new FishingContext(
-                level.getLevel(), null, null, random, pos.getCenter(), pos, 0,
+                level.getLevel(), null, null, random, net.minecraft.world.phys.Vec3.atCenterOf(pos), pos, 0,
                 medium.id().getPath(), biome, nearestBiome, level.getLevel().dimension(),
                 TideUtils.getTemperatureAt(pos, level.getLevel()),
-                level.getMoonPhase(), SeasonsCompat.getSeason(level.getLevel())
+                level.environmentAttributes().getValue(net.minecraft.world.attribute.EnvironmentAttributes.MOON_PHASE, pos).index(), SeasonsCompat.getSeason(level.getLevel())
         );
 
         boolean conditionsMatch = data.shouldKeep(context);

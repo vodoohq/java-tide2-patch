@@ -1,6 +1,9 @@
 package com.li64.tide.data;
 
 import com.li64.tide.data.triggers.TideSimpleTrigger;
+import com.li64.tide.Tide;
+import net.minecraft.core.registries.BuiltInRegistries;
+import java.util.Optional;
 //? if >= 26.2 {
 import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;

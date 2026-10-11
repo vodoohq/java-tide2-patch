@@ -70,17 +70,17 @@ public class FishRenderer<M extends FishModel> extends MobRenderer<Mob, FishRend
                 float bob, float yBodyRot
         ) {
                 super.setupRotations(state, poseStack, bob, yBodyRot);
-                poseStack.mulPose(Axis.YP.rotationDegrees(state.swimAnim));
+                poseStack.rotate(Axis.YP.rotationDegrees(state.swimAnim));
                 if (!(state.isInWater || state.isInLava) && flipInAir()) {
                         poseStack.translate(0.1f, 0.1f, -0.1f);
-                        poseStack.mulPose(Axis.ZP.rotationDegrees(90f));
+                        poseStack.rotate(Axis.ZP.rotationDegrees(90f));
                 } else {
                         // temp workaround for a bug with alex's caves
                         float tilt = Mth.clamp(state.deltaMovementY * 1.5f * (float) xTiltScale, -Mth.HALF_PI, Mth.HALF_PI);
                         if (Tide.PLATFORM.isModLoaded("alexscaves")) {
-                                poseStack.mulPose(Axis.XP.rotation(tilt));
+                                poseStack.rotate(Axis.XP.rotation(tilt));
                         } else {
-                                poseStack.mulPose(Axis.XP.rotation(Mth.lerp(state.partialTick, state.xRotO, tilt)));
+                                poseStack.rotate(Axis.XP.rotation(Mth.lerp(state.partialTick, state.xRotO, tilt)));
                         }
                 }
         }
@@ -136,18 +136,18 @@ public class FishRenderer<M extends FishModel> extends MobRenderer<Mob, FishMode
         protected void setupRotations(Mob fish, PoseStack poseStack, float bob, float yBodyRot, float partialTick, float scale) {
                 super.setupRotations(fish, poseStack, bob, yBodyRot, partialTick, scale);
                 float f = swimAnimScale * 4.3f * Mth.sin(swimAnimSpeed * (fish.tickCount + partialTick));
-                poseStack.mulPose(Axis.YP.rotationDegrees(f));
+                poseStack.rotate(Axis.YP.rotationDegrees(f));
                 if (!(fish.isInWaterOrBubble() || fish.isInLava()) && flipInAir()) {
                 poseStack.translate(0.1f, 0.1f, -0.1f);
-                poseStack.mulPose(Axis.ZP.rotationDegrees(90f));
+                poseStack.rotate(Axis.ZP.rotationDegrees(90f));
                 }
                 else {
                 // temp workaround for a bug with alex's caves
                 float tilt = Mth.clamp((float) (fish.getDeltaMovement().y() * 1.5 * xTiltScale), -Mth.HALF_PI, Mth.HALF_PI);
-                if (Tide.PLATFORM.isModLoaded("alexscaves")) poseStack.mulPose(Axis.XP.rotation(tilt));
+                if (Tide.PLATFORM.isModLoaded("alexscaves")) poseStack.rotate(Axis.XP.rotation(tilt));
                 else {
                         fish.setXRot(tilt);
-                        poseStack.mulPose(Axis.XP.rotation(Mth.lerp(partialTick, fish.xRotO, fish.getXRot())));
+                        poseStack.rotate(Axis.XP.rotation(Mth.lerp(partialTick, fish.xRotO, fish.getXRot())));
                 }
                 }
         }
@@ -200,18 +200,18 @@ public class FishRenderer<M extends FishModel> extends MobRenderer<Mob, FishMode
         protected void setupRotations(Mob fish, PoseStack poseStack, float bob, float yBodyRot, float partialTick) {
                 super.setupRotations(fish, poseStack, bob, yBodyRot, partialTick);
                 float f = swimAnimScale * 4.3f * Mth.sin(swimAnimSpeed * (fish.tickCount + partialTick));
-                poseStack.mulPose(Axis.YP.rotationDegrees(f));
+                poseStack.rotate(Axis.YP.rotationDegrees(f));
                 if (!(fish.isInWaterOrBubble() || fish.isInLava()) && flipInAir()) {
                 poseStack.translate(0.1f, 0.1f, -0.1f);
-                poseStack.mulPose(Axis.ZP.rotationDegrees(90f));
+                poseStack.rotate(Axis.ZP.rotationDegrees(90f));
                 }
                 else {
                 // temp workaround for a bug with alex's caves
                 float tilt = Mth.clamp((float) (fish.getDeltaMovement().y() * 1.5 * xTiltScale), -Mth.HALF_PI, Mth.HALF_PI);
-                if (Tide.PLATFORM.isModLoaded("alexscaves")) poseStack.mulPose(Axis.XP.rotation(tilt));
+                if (Tide.PLATFORM.isModLoaded("alexscaves")) poseStack.rotate(Axis.XP.rotation(tilt));
                 else {
                         fish.setXRot(tilt);
-                        poseStack.mulPose(Axis.XP.rotation(Mth.lerp(partialTick, fish.xRotO, fish.getXRot())));
+                        poseStack.rotate(Axis.XP.rotation(Mth.lerp(partialTick, fish.xRotO, fish.getXRot())));
                 }
                 }
         }

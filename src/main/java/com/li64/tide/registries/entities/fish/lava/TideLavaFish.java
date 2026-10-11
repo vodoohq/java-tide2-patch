@@ -6,6 +6,8 @@ import com.li64.tide.data.fishing.FishData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -112,7 +114,7 @@ public class TideLavaFish extends LavaAnimal implements Bucketable, FishLengthHo
                     (this.random.nextFloat() * 2.0 - 1.0) * 0.05)
             );
             this.setOnGround(false);
-            this.hasImpulse = true;
+            this.needsSync = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
         }
         super.aiStep();
@@ -191,17 +193,17 @@ public class TideLavaFish extends LavaAnimal implements Bucketable, FishLengthHo
     }
 
     @Override
-    public void addAdditionalSaveData(@NotNull CompoundTag compound) {
+    public void addAdditionalSaveData(@NotNull ValueOutput compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("FromBucket", this.fromBucket());
         compound.putDouble(tide$LENGTH_KEY, length);
     }
 
     @Override
-    public void readAdditionalSaveData(@NotNull CompoundTag tag) {
+    public void readAdditionalSaveData(@NotNull ValueInput tag) {
         super.readAdditionalSaveData(tag);
-        this.setFromBucket(tag.contains("FromBucket") && tag.getBoolean("FromBucket"));
-        this.length = tag.contains(tide$LENGTH_KEY) ? tag.getDouble(tide$LENGTH_KEY) : this.length;
+        this.setFromBucket(tag.getBooleanOr("FromBucket", false));
+        this.length = tag.getDoubleOr(tide$LENGTH_KEY, this.length);
     }
 
     @Override @SuppressWarnings("deprecation")
@@ -219,7 +221,7 @@ public class TideLavaFish extends LavaAnimal implements Bucketable, FishLengthHo
     @Override @SuppressWarnings("deprecation")
     public void loadFromBucketTag(@NotNull CompoundTag tag) {
         Bucketable.loadDefaultDataFromBucketTag(this, tag);
-        this.length = tag.contains(tide$LENGTH_KEY) ? tag.getDouble(tide$LENGTH_KEY) : this.length;
+        this.length = tag.getDoubleOr(tide$LENGTH_KEY, this.length);
     }
 
     @Override
@@ -309,7 +311,7 @@ public class TideLavaFish extends LavaAnimal implements Bucketable, FishLengthHo
             entity.saveToBucketTag(filledBucket);
             player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, filledBucket, false));
 
-            if (!entity.level().isClientSide) CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer)player, filledBucket);
+            if (!entity.level().isClientSide()) CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer)player, filledBucket);
 
             entity.playSound(entity.getPickupSound(), 1.0F, 1.0F);
             entity.discard();

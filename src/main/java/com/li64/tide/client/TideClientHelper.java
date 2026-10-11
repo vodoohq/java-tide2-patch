@@ -23,7 +23,7 @@ public class TideClientHelper {
     public static void openJournalScreen(Item turnTo) {
         if (Minecraft.getInstance().player == null) return;
         FishingJournal screen = new FishingJournal(Minecraft.getInstance().player);
-        Minecraft.getInstance().setScreen(screen);
+        Minecraft.getInstance().setScreenAndShow(screen);
     }
 
     public static void showToast(Component title, Component description, ItemStack display) {
@@ -31,7 +31,7 @@ public class TideClientHelper {
     }
 
     public static void openNoteScreen(ItemStack stack) {
-        Minecraft.getInstance().setScreen(new FishyNoteScreen(stack));
+        Minecraft.getInstance().setScreenAndShow(new FishyNoteScreen(stack));
     }
 
     //? if neoforge {

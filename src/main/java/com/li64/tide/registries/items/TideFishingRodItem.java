@@ -438,7 +438,7 @@ public class TideFishingRodItem extends FishingRodItem {
     public void retrieveHook(ItemStack rod, Player player, Level level) {
         TideFishingHook activeHook = HookAccessor.getHook(player);
         if (activeHook != null) {
-            if (!level.isClientSide/*? if >=1.21 {*/()/*?}*/) {
+            if (!level.isClientSide()) {
                 int durabilityLoss = activeHook.retrieve(rod, (ServerLevel) level, player);
                 //? if >=26.2 {
                 rod.hurtAndBreak(durabilityLoss, player, player.getUsedItemHand());
@@ -509,7 +509,7 @@ public class TideFishingRodItem extends FishingRodItem {
 
     private void giveOrDrop(ItemStack stack, Player player) {
         if (stack == null || stack.isEmpty()) return;
-        ItemEntity item = player.drop(stack, false);
+        ItemEntity item = player.drop(stack, false, net.minecraft.util.Prediction.SERVER_ONLY);
         if (item != null) item.setNoPickUpDelay();
     }
 

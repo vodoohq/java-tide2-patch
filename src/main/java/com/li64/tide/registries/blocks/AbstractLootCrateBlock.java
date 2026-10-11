@@ -31,14 +31,14 @@ public abstract class AbstractLootCrateBlock<E extends BlockEntity> extends Barr
     //? if >=1.21 {
     @Override
     protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult result) {
-        if (level.isClientSide) return InteractionResult.SUCCESS;
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
         if (level.getBlockEntity(pos) instanceof LootCrateBlockEntity block) player.openMenu(block);
         return InteractionResult.CONSUME;
     }
     //?} else {
     /*@Override
     public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (level.isClientSide) return InteractionResult.SUCCESS;
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
         if (level.getBlockEntity(pos) instanceof LootCrateBlockEntity block) player.openMenu(block);
         return InteractionResult.CONSUME;
     }

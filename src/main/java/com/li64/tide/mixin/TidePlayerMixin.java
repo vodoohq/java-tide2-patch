@@ -16,14 +16,13 @@ public abstract class TidePlayerMixin implements TidePlayer {
     @Unique public String tide$dataKey = "TidePersistentData";
 
     @Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
-    private void readAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
-        if (!compound.contains(tide$dataKey)) compound.put(tide$dataKey, tide$playerData);
-        else tide$playerData = compound.getCompound(tide$dataKey);
+    private void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput input, CallbackInfo ci) {
+        tide$playerData = input.read(tide$dataKey, CompoundTag.CODEC).orElseGet(CompoundTag::new);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("HEAD"))
-    private void addAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
-        compound.put(tide$dataKey, tide$playerData);
+    private void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput output, CallbackInfo ci) {
+        output.store(tide$dataKey, CompoundTag.CODEC, tide$playerData);
     }
 
     @Override

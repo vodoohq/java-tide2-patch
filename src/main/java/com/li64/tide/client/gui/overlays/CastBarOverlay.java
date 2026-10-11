@@ -66,8 +66,8 @@ public class CastBarOverlay {
 
         RenderSystem.enableBlend();
         graphics.setColor(1f, 1f, 1f, alpha);
-        graphics.blit(BAR_EMPTY_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
-        graphics.blit(BAR_FILLED_TEX, x, y, 0, 0, fillWidth, texHeight, texWidth, texHeight);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BAR_EMPTY_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BAR_FILLED_TEX, x, y, 0, 0, fillWidth, texHeight, texWidth, texHeight);
         RenderSystem.disableBlend();
         graphics.setColor(1f, 1f, 1f, 1f);
     }

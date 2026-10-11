@@ -9,6 +9,8 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public class LavaBoundPathNavigation extends PathNavigation {
+    @Override
+    public boolean canNavigateGround() { return false; }
     private boolean allowBreaching;
 
     public LavaBoundPathNavigation(Mob mob, Level level) {
@@ -22,7 +24,7 @@ public class LavaBoundPathNavigation extends PathNavigation {
     }
 
     protected boolean canUpdatePath() {
-        return this.allowBreaching || this.mob.isInWaterOrBubble() || mob.isInLava();
+        return this.allowBreaching || this.mob.isInWater() || mob.isInLava();
     }
 
     protected @NotNull Vec3 getTempMobPos() {
@@ -38,7 +40,7 @@ public class LavaBoundPathNavigation extends PathNavigation {
     }
 
     public boolean isStableDestination(@NotNull BlockPos pos) {
-        return !this.level.getBlockState(pos).isSolidRender(this.level, pos);
+        return !this.level.getBlockState(pos).isSolidRender();
     }
 
     public void setCanFloat(boolean canSwim) {}

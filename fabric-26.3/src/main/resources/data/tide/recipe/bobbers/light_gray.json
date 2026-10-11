@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#c:slime_balls",
+    "#minecraft:planks",
+    "#c:dyes/light_gray"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:light_gray_bobber"
+  }
+}

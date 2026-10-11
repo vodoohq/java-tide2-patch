@@ -4,10 +4,10 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 
 //? if >=26.2 {
-import com.mojang.blaze3d.PrimitiveTopology;
-import com.mojang.blaze3d.pipeline.BlendFunction;
-import com.mojang.blaze3d.pipeline.ColorTargetState;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.renderpearl.api.pipeline.PrimitiveTopology;
+import com.mojang.renderpearl.api.pipeline.BlendFunction;
+import com.mojang.renderpearl.api.pipeline.ColorTargetState;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 
 import net.minecraft.client.renderer.BindGroupLayouts;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
@@ -30,7 +30,8 @@ public abstract class TideRenderTypes {
         //? if >=26.2 {
         private static final RenderPipeline FULL_WHITE_ITEM_PIPELINE = RenderPipeline.builder()
                 .withLocation(Identifier.fromNamespaceAndPath("tide", "full_white_item"))
-                .withBindGroupLayout(BindGroupLayouts.MATRICES_PROJECTION)
+                .withBindGroupLayout(BindGroupLayouts.DYNAMIC_TRANSFORMS)
+                .withBindGroupLayout(BindGroupLayouts.PROJECTION)
                 .withVertexShader(Identifier.fromNamespaceAndPath("minecraft", "core/position_tex_color"))
                 .withFragmentShader(TideCoreShaders.FULL_WHITE)
                 .withBindGroupLayout(BindGroupLayouts.SAMPLER0)

@@ -75,7 +75,7 @@ public class StarlightBowItem extends BowItem implements TooltipItem {
         level.playSound(null, shooter.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.5f, 1.0f - (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.1f);
         //?} else {
         /*
-        level.playSound(null, shooter.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.5f, 1.0f - (level.random.nextFloat() - level.random.nextFloat()) * 0.1f);
+        level.playSound(null, shooter.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.5f, 1.0f - (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.1f);
         */
         //?}
     }
@@ -103,7 +103,7 @@ public class StarlightBowItem extends BowItem implements TooltipItem {
                 float power = getPowerForTime(j);
                 if (!(power < 0.1)) {
                     boolean skipAmmoConsume = (hasInfinity && ammo.is(Items.ARROW)) || shooter.getRandom().nextFloat() < 0.6f;
-                    if (!level.isClientSide) {
+                    if (!level.isClientSide()) {
                         AbstractArrow arrow = (AbstractArrow) createProjectile(level, shooter, weapon, ammo, power == 1f);
                         arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, power * 3.0F, 1.0F);
 
@@ -131,7 +131,7 @@ public class StarlightBowItem extends BowItem implements TooltipItem {
                             1.0F,
                             1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + power * 0.5F
                     );
-                    level.playSound(null, shooter.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.5f, 1.0f - (level.random.nextFloat() - level.random.nextFloat()) * 0.1f);
+                    level.playSound(null, shooter.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.5f, 1.0f - (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.1f);
                     if (!skipAmmoConsume && !player.getAbilities().instabuild) {
                         ammo.shrink(1);
                         if (ammo.isEmpty()) player.getInventory().removeItem(ammo);

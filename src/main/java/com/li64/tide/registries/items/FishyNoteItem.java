@@ -61,7 +61,7 @@ public class FishyNoteItem extends Item {
 
     public static ItemStack getFish(ItemStack note) {
         ResourceKey<Item> key = getFishKey(note);
-        Item item = BuiltInRegistries.ITEM.get(key)/*? if >=26.2 {*/.map(Reference::value).orElse(null)/*?}*/;
+        Item item = BuiltInRegistries.ITEM.getOptional(key).orElse(null);
         return item == null ? ItemStack.EMPTY : new ItemStack(item);
     }
 
@@ -83,7 +83,7 @@ public class FishyNoteItem extends Item {
             Tide.NETWORK.sendToPlayer(new ViewNoteMsg(getFish(note)), serverPlayer);
 
             TidePlayerData data = TidePlayerData.getOrCreate(serverPlayer);
-            Item fish = BuiltInRegistries.ITEM.get(getFishKey(note))/*? if >=26.2 {*/.map(Reference::value).orElse(null)/*?}*/;
+            Item fish = BuiltInRegistries.ITEM.getOptional(getFishKey(note)).orElse(null);
             if (fish != null) {
                 data.markNoteUnlocked(fish);
                 data.syncTo(serverPlayer);
@@ -105,7 +105,7 @@ public class FishyNoteItem extends Item {
             Tide.NETWORK.sendToPlayer(new ViewNoteMsg(getFish(note)), serverPlayer);
 
             TidePlayerData data = TidePlayerData.getOrCreate(serverPlayer);
-            Item fish = BuiltInRegistries.ITEM.get(getFishKey(note));
+            Item fish = BuiltInRegistries.ITEM.getValue(getFishKey(note));
             if (fish != null) {
                 data.markNoteUnlocked(fish);
                 data.syncTo(serverPlayer);

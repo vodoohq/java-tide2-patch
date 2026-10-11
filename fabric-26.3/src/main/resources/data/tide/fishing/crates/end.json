@@ -1,0 +1,19 @@
+{
+  "block": {
+    "id": "tide:purpur_crate",
+    "properties": {
+      "facing": "north",
+      "open": "false"
+    }
+  },
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:the_end"
+      ]
+    }
+  ],
+  "loot_table": "tide:chests/crates/end",
+  "weight": 1
+}

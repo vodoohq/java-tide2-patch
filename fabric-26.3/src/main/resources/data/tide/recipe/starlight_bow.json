@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:bow",
+    "tide:shooting_starfish"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:starlight_bow"
+  }
+}

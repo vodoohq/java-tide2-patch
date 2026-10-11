@@ -17,10 +17,15 @@ public class HookAccessor extends FishingHook {
     public HookAccessor(TideFishingHook hook, Level level) {
         super(TideEntityTypes.HOOK_ACCESSOR, level);
         this.hook = hook;
+        syncPosition();
     }
 
     public HookAccessor(EntityType<? extends FishingHook> entityType, Level level) {
         super(entityType, level);
+    }
+
+    public void syncPosition() {
+        if (hook != null) setPos(hook.position());
     }
 
     private boolean checkIsUnlinked() {
@@ -52,24 +57,6 @@ public class HookAccessor extends FishingHook {
     public boolean isOpenWaterFishing() {
         if (this.checkIsUnlinked()) return false;
         return hook.isOpenWaterFishing();
-    }
-
-    @Override
-    public double getX() {
-        if (this.checkIsUnlinked()) return 0.0;
-        return hook.getX();
-    }
-
-    @Override
-    public double getY() {
-        if (this.checkIsUnlinked()) return 0.0;
-        return hook.getY();
-    }
-
-    @Override
-    public double getZ() {
-        if (this.checkIsUnlinked()) return 0.0;
-        return hook.getZ();
     }
 
     @Override

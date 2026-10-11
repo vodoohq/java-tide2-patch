@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Inventory.class)
 public class InventoryMixin {
-    @Shadow @Final public NonNullList<ItemStack> items;
+    @Shadow @Final private NonNullList<ItemStack> items;
     @Shadow @Final public Player player;
 
     @Inject(at = @At(value = "HEAD"), method = "add(ILnet/minecraft/world/item/ItemStack;)Z", cancellable = true)
@@ -26,7 +26,7 @@ public class InventoryMixin {
         for (ItemStack checked : this.items) {
             if (!(checked.getItem() instanceof FishSatchelItem satchelItem)) continue;
             if (!TideItemData.FISH_SATCHEL_OPENED.getOrDefault(checked, false)) continue;
-            if (FishSatchelItem.getRemainingSlots(stack) < stack.getCount()) continue;
+            if (FishSatchelItem.getRemainingSlots(checked) < stack.getCount()) continue;
             int i = 0;
             boolean continueAdding = true;
             while (continueAdding && stack.getCount() > 0 && i < 64) {

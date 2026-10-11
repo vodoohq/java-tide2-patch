@@ -33,7 +33,7 @@ public class TideToasts {
     //?}
 
     public static void display(Toast toast) {
-        Minecraft.getInstance().getToasts().addToast(toast);
+        Minecraft.getInstance().gui.toastManager().addToast(toast);
     }
 
     public static class NewPageToast implements Toast {
@@ -74,12 +74,12 @@ public class TideToasts {
             @Override
             public @NotNull Visibility render(GuiGraphics graphics, ToastComponent component, long time) {
             //? if >=1.21 {
-            graphics.blitSprite(TEXTURE, 0, 0, this.width(), this.height());
+            graphics.blitSprite(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE, 0, 0, this.width(), this.height());
             //?} else {
-            graphics.blit(TEXTURE, 0, 0, 0, 32, this.width(), this.height());
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE, 0, 0, 0, 32, this.width(), this.height());
             //?}
-            graphics.drawString(component.getMinecraft().font, title, 30, 7, -11534256, false);
-            graphics.drawString(component.getMinecraft().font, description, 30, 18, -16777216, false);
+            graphics.text(component.getMinecraft().font, title, 30, 7, -11534256, false);
+            graphics.text(component.getMinecraft().font, description, 30, 18, -16777216, false);
             graphics.renderFakeItem(displayedItem, 8, 8);
             return (double) (time) >= 5000.0D * component.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
             }

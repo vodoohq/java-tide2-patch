@@ -4,6 +4,8 @@ import com.li64.tide.data.FishLengthHolder;
 import com.li64.tide.data.fishing.FishData;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -101,7 +103,7 @@ public abstract class AbstractTideFish extends WaterAnimal implements Bucketable
                     (this.random.nextFloat() * 2.0 - 1.0) * 0.05)
             );
             this.setOnGround(false);
-            this.hasImpulse = true;
+            this.needsSync = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
         }
         super.aiStep();
@@ -166,17 +168,17 @@ public abstract class AbstractTideFish extends WaterAnimal implements Bucketable
     }
 
     @Override
-    public void addAdditionalSaveData(@NotNull CompoundTag compound) {
+    public void addAdditionalSaveData(@NotNull ValueOutput compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("FromBucket", this.fromBucket());
         compound.putDouble(tide$LENGTH_KEY, this.length);
     }
 
     @Override
-    public void readAdditionalSaveData(@NotNull CompoundTag tag) {
+    public void readAdditionalSaveData(@NotNull ValueInput tag) {
         super.readAdditionalSaveData(tag);
-        this.setFromBucket(tag.contains("FromBucket") && tag.getBoolean("FromBucket"));
-        this.length = tag.contains(tide$LENGTH_KEY) ? tag.getDouble(tide$LENGTH_KEY) : this.length;
+        this.setFromBucket(tag.getBooleanOr("FromBucket", false));
+        this.length = tag.getDoubleOr(tide$LENGTH_KEY, this.length);
     }
 
     @Override @SuppressWarnings("deprecation")
@@ -195,7 +197,7 @@ public abstract class AbstractTideFish extends WaterAnimal implements Bucketable
     @Override @SuppressWarnings("deprecation")
     public void loadFromBucketTag(@NotNull CompoundTag tag) {
         Bucketable.loadDefaultDataFromBucketTag(this, tag);
-        this.length = tag.contains(tide$LENGTH_KEY) ? tag.getDouble(tide$LENGTH_KEY) : this.tide$getLength();
+        this.length = tag.getDoubleOr(tide$LENGTH_KEY, this.tide$getLength());
     }
 
     @Override

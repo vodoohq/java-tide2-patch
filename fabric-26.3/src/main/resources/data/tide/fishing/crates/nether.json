@@ -1,0 +1,19 @@
+{
+  "block": {
+    "id": "tide:obsidian_crate",
+    "properties": {
+      "facing": "north",
+      "open": "false"
+    }
+  },
+  "conditions": [
+    {
+      "type": "tide:dimension",
+      "dimensions": [
+        "minecraft:the_nether"
+      ]
+    }
+  ],
+  "loot_table": "tide:chests/crates/nether",
+  "weight": 1
+}

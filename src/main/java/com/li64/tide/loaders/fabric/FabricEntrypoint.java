@@ -23,7 +23,12 @@ import net.minecraft.world.level.levelgen.Heightmap;
 //? if >=26.2 {
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
-import net.fabricmc.fabric.api.registry.FuelValueEvents;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.CookingFuel;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ResolvableInt;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ResolvableFloat;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
 //?} else {
 /*
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -76,12 +81,12 @@ public class FabricEntrypoint implements ModInitializer {
         TideEntityAttributes.REGISTRY.forEach(FabricEntrypoint::registerAttributes);
 
         //? if >=26.2 {
-        FuelValueEvents.BUILD.register((builder, context) -> {
-                builder.add(TideItems.WOODEN_CRATE, 300);
-                builder.add(TideItems.ANGLING_TABLE, 300);
-                builder.add(TideItems.FISH_DISPLAY, 300);
-                builder.add(TideItems.FISHY_NOTE, 200);
-                builder.add(TideFish.INFERNO_GUPPY, 3200);
+        DefaultItemComponentEvents.MODIFY.register(context -> {
+                context.modify(TideItems.WOODEN_CRATE, builder -> builder.set(DataComponents.COOKING_FUEL, new CookingFuel(new ResolvableInt.Constant(300), ResolvableFloat.fromKey(ContextFloatProviders.COOKING_DEFAULT_SPEED_MULTIPLIER))));
+                context.modify(TideItems.ANGLING_TABLE, builder -> builder.set(DataComponents.COOKING_FUEL, new CookingFuel(new ResolvableInt.Constant(300), ResolvableFloat.fromKey(ContextFloatProviders.COOKING_DEFAULT_SPEED_MULTIPLIER))));
+                context.modify(TideItems.FISH_DISPLAY, builder -> builder.set(DataComponents.COOKING_FUEL, new CookingFuel(new ResolvableInt.Constant(300), ResolvableFloat.fromKey(ContextFloatProviders.COOKING_DEFAULT_SPEED_MULTIPLIER))));
+                context.modify(TideItems.FISHY_NOTE, builder -> builder.set(DataComponents.COOKING_FUEL, new CookingFuel(new ResolvableInt.Constant(200), ResolvableFloat.fromKey(ContextFloatProviders.COOKING_DEFAULT_SPEED_MULTIPLIER))));
+                context.modify(TideFish.INFERNO_GUPPY, builder -> builder.set(DataComponents.COOKING_FUEL, new CookingFuel(new ResolvableInt.Constant(3200), ResolvableFloat.fromKey(ContextFloatProviders.COOKING_DEFAULT_SPEED_MULTIPLIER))));
         });
         //?} else {
         /*

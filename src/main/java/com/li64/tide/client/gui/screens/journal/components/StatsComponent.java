@@ -77,7 +77,7 @@ public class StatsComponent extends ProfileComponent {
                         graphics.text(font, line, center - font.width(line) / 2, y, TEXT_COLOR, false);
                         //?} else {
                         /*
-                        graphics.drawString(font, line, center - font.width(line) / 2, y, TEXT_COLOR, false);
+                        graphics.text(font, line, center - font.width(line) / 2, y, TEXT_COLOR, false);
                         */
                         //?}
                         cursorY += 11;

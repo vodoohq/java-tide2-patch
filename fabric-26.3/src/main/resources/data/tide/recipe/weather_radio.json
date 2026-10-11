@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "#c:ingots/copper",
+    "L": "minecraft:lightning_rod",
+    "R": "#c:dusts/redstone"
+  },
+  "pattern": [
+    " L ",
+    "#R#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:weather_radio"
+  }
+}

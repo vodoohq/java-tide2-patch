@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "tide:dragon_fish",
+  "base": "minecraft:netherite_boots",
+  "result": {
+    "count": 1,
+    "id": "tide:dragonfin_boots"
+  },
+  "template": "minecraft:dragon_breath"
+}

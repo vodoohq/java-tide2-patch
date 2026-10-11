@@ -50,7 +50,7 @@ public class SeasonsComponent extends ProfileComponent {
         graphics.text(font, TITLE, center - font.width(TITLE) / 2, y, TEXT_COLOR, false);
         //?} else {
         /*
-        graphics.drawString(font, TITLE, center - font.width(TITLE) / 2, y, TEXT_COLOR, false);
+        graphics.text(font, TITLE, center - font.width(TITLE) / 2, y, TEXT_COLOR, false);
         */
         //?}
 
@@ -72,7 +72,7 @@ public class SeasonsComponent extends ProfileComponent {
             graphics.blit(RenderPipelines.GUI_TEXTURED, SEASONS, seasonX, seasonY, offset, 0, 8, 8, 32, 8, ARGB.white(1f));
             //?} else {
             /*
-            graphics.blit(SEASONS, seasonX, seasonY, offset, 0, 8, 8, 32, 8);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, SEASONS, seasonX, seasonY, offset, 0, 8, 8, 32, 8);
             */
             //?}
 

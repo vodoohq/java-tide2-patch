@@ -71,7 +71,7 @@ public class TideUtils {
         /*
         public static Item itemFromLocation(ResourceLocation location) {
                 return BuiltInRegistries.ITEM.getOptional(location).orElse(
-                        BuiltInRegistries.ITEM.get(BuiltInRegistries.ITEM.getKey(Items.AIR)));
+                        BuiltInRegistries.ITEM.getValue(BuiltInRegistries.ITEM.getKey(Items.AIR)));
         }
         */
         //?}
@@ -136,7 +136,7 @@ public class TideUtils {
     }
 
     public static float getTemperatureAt(BlockPos pos, ServerLevel level) {
-        Climate.Sampler sampler = level.getChunkSource().randomState().sampler();
+        Climate.Sampler sampler = level.getChunkSource().randomState().createClimateSampler(net.minecraft.world.level.levelgen.densityfunction.SamplerContext.EMPTY_UNCACHED);
         int x = QuartPos.fromBlock(pos.getX());
         int y = QuartPos.fromBlock(pos.getY());
         int z = QuartPos.fromBlock(pos.getZ());
@@ -213,7 +213,7 @@ public class TideUtils {
     //?} else {
     /*
     public static long getTimeOfDay(ServerLevel level) {
-        return level.getDayTime() % 24000;
+        return level.getOverworldClockTime() % 24000;
     }
     */
     //?}
@@ -237,22 +237,22 @@ public class TideUtils {
         top = Math.min(top, height / 2);
         bottom = Math.min(bottom, height / 2);
         if (width == uWidth && height == vHeight) {
-            graphics.blit(tex, x, y, uOffset, vOffset, width, height, textureWidth, textureHeight);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x, y, uOffset, vOffset, width, height, textureWidth, textureHeight);
         } else if (height == vHeight) {
-            graphics.blit(tex, x, y, uOffset, vOffset, left, height, textureWidth, textureHeight);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x, y, uOffset, vOffset, left, height, textureWidth, textureHeight);
             blitRepeating(graphics, tex, x + left, y, width - right - left, height, uOffset + left, vOffset, uWidth - right - left, vHeight, textureWidth, textureHeight);
-            graphics.blit(tex, x + width - right, y, uOffset + uWidth - right, vOffset, right, height, textureWidth, textureHeight);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x + width - right, y, uOffset + uWidth - right, vOffset, right, height, textureWidth, textureHeight);
         } else if (width == uWidth) {
-            graphics.blit(tex, x, y, uOffset, vOffset, width, top, textureWidth, textureHeight);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x, y, uOffset, vOffset, width, top, textureWidth, textureHeight);
             blitRepeating(graphics, tex, x, y + top, width, height - bottom - top, uOffset, vOffset + top, uWidth, vHeight - bottom - top, textureWidth, textureHeight);
-            graphics.blit(tex, x, y + height - bottom, uOffset, vOffset + vHeight - bottom, width, bottom, textureWidth, textureHeight);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x, y + height - bottom, uOffset, vOffset + vHeight - bottom, width, bottom, textureWidth, textureHeight);
         } else {
-            graphics.blit(tex, x, y, uOffset, vOffset, left, top, textureWidth, textureHeight);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x, y, uOffset, vOffset, left, top, textureWidth, textureHeight);
             blitRepeating(graphics, tex, x + left, y, width - right - left, top, uOffset + left, vOffset, uWidth - right - left, top, textureWidth, textureHeight);
-            graphics.blit(tex, x + width - right, y, uOffset + uWidth - right, vOffset, right, top, textureWidth, textureHeight);
-            graphics.blit(tex, x, y + height - bottom, uOffset, vOffset + vHeight - bottom, left, bottom, textureWidth, textureHeight);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x + width - right, y, uOffset + uWidth - right, vOffset, right, top, textureWidth, textureHeight);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x, y + height - bottom, uOffset, vOffset + vHeight - bottom, left, bottom, textureWidth, textureHeight);
             blitRepeating(graphics, tex, x + left, y + height - bottom, width - right - left, bottom, uOffset + left, vOffset + vHeight - bottom, uWidth - right - left, bottom, textureWidth, textureHeight);
-            graphics.blit(tex, x + width - right, y + height - bottom, uOffset + uWidth - right, vOffset + vHeight - bottom, right, bottom, textureWidth, textureHeight);
+            graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x + width - right, y + height - bottom, uOffset + uWidth - right, vOffset + vHeight - bottom, right, bottom, textureWidth, textureHeight);
             blitRepeating(graphics, tex, x, y + top, left, height - bottom - top, uOffset, vOffset + top, left, vHeight - bottom - top, textureWidth, textureHeight);
             blitRepeating(graphics, tex, x + left, y + top, width - right - left, height - bottom - top, uOffset + left, vOffset + top, uWidth - right - left, vHeight - bottom - top, textureWidth, textureHeight);
             blitRepeating(graphics, tex, x + width - right, y + top, left, height - bottom - top, uOffset + uWidth - right, vOffset + top, right, vHeight - bottom - top, textureWidth, textureHeight);
@@ -271,7 +271,7 @@ public class TideUtils {
             for(IntIterator intIterator2 = slices(height, uHeight); intIterator2.hasNext(); l += m) {
                 m = intIterator2.nextInt();
                 int n = (uHeight - m) / 2;
-                graphics.blit(atlasLocation, i, l, uOffset + k, vOffset + n, j, m, textureWidth, textureHeight);
+                graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, atlasLocation, i, l, uOffset + k, vOffset + n, j, m, textureWidth, textureHeight);
             }
         }
     }

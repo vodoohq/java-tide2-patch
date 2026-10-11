@@ -50,7 +50,7 @@ public abstract class BarComponent extends ProfileComponent {
         graphics.blit(RenderPipelines.GUI_TEXTURED, bar, x + minX, y, minX, 0, width, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT, ARGB.white(1f));
         //?} else {
         /*
-        graphics.blit(bar, x + minX, y, minX, 0, width, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, bar, x + minX, y, minX, 0, width, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
         */
         //?}
 
@@ -60,8 +60,8 @@ public abstract class BarComponent extends ProfileComponent {
         graphics.blit(RenderPipelines.GUI_TEXTURED, DIVIDER, x + maxX - 1, y - 1, 0, 0, DIV_WIDTH, DIV_HEIGHT, DIV_WIDTH, DIV_HEIGHT, ARGB.white(1f));
         //?} else {
         /*
-        graphics.blit(DIVIDER, x + minX - 1, y - 1, 0, 0, DIV_WIDTH, DIV_HEIGHT, DIV_WIDTH, DIV_HEIGHT);
-        graphics.blit(DIVIDER, x + maxX - 1, y - 1, 0, 0, DIV_WIDTH, DIV_HEIGHT, DIV_WIDTH, DIV_HEIGHT);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, DIVIDER, x + minX - 1, y - 1, 0, 0, DIV_WIDTH, DIV_HEIGHT, DIV_WIDTH, DIV_HEIGHT);
+        graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, DIVIDER, x + maxX - 1, y - 1, 0, 0, DIV_WIDTH, DIV_HEIGHT, DIV_WIDTH, DIV_HEIGHT);
         */
         //?}
     }
