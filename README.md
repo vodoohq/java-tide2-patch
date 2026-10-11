@@ -6,6 +6,10 @@ crates and decorative displays are retained. This fork is currently an alpha.
 
 **Download:** https://github.com/vodoohq/java-tide2-patch/releases
 
+The 26.3 migration used substantial AI assistance for compatibility code, tooling,
+tests, and documentation, with human direction and feedback. Original gameplay
+and artwork are retained from upstream. See [the publication description](docs/MODRINTH-DESCRIPTION.md).
+
 ## Install
 
 Download the Tide release jar and put it in your existing pack's or server's `mods/`

@@ -52,11 +52,15 @@ tasks.named('processResources') {
 
 tasks.named('jar') {
     from('../LICENSE.txt')
+    from('../NOTICE.md')
+    from('../licenses') { into 'META-INF/licenses' }
 }
 
 tasks.named('sourcesJar') {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from('../LICENSE.txt')
+    from('../NOTICE.md')
+    from('../licenses') { into 'META-INF/licenses' }
 }
 
 fabricApi {

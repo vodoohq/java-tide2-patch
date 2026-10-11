@@ -18,3 +18,13 @@ source is available here and as a release sources jar.
 Releases distribute only the Tide port and its corresponding source. Required
 dependencies such as Fabric API and Cloth Config retain their own licenses and
 are installed separately. Voodoo SMP and its companion UI are not released here.
+
+The upstream `compat/fishingreal/FishingConversion.java` helper adapts code from
+**ExpensiveKoala's Fishing Real**, licensed under MIT:
+https://github.com/ExpensiveKoala/Fishing-Real. Its original MIT copyright and
+license are preserved in `licenses/Fishing-Real-MIT.txt` and bundled with the jars.
+
+The 26.3 compatibility migration used substantial generative AI assistance for
+code, resource-conversion tooling, build scripts, tests, and documentation, with
+a human in the loop providing scope, direction, and feedback. Original gameplay
+and artwork are retained from upstream. No new AI artwork was introduced.
