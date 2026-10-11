@@ -10,16 +10,13 @@ trades to Minecraft's current APIs and resource formats.
 
 ## Downloads
 
-- `VoodooSMP-26.3-tide-alpha.2.mrpack`: the current Voodoo SMP client pack with Tide
-  bundled, the existing Voodoo UI, both resource packs, and Modrinth dependencies.
-  Import this file into Modrinth App to create a new instance.
-- `Tide2-Fabric-26.3-alpha.2.mrpack`: a small standalone Tide test pack containing
-  Tide plus Fabric API and Cloth Config. Import as a new instance.
 - `tide-fabric-26.3-2.1.1+voodoo.26.3.alpha.2.jar`: manual installation into an
   existing Fabric 26.3 instance or dedicated server, alongside Fabric API and Cloth
   Config. Install the same Tide version on server and clients. Keep only one Tide jar.
 - `*-sources.jar`: corresponding port source. `SHA256SUMS.txt`: file checksums.
-- `voodoo-ui-1.0.0+26.3.jar`: client companion referenced by the full pack.
+
+This release contains only the Tide 2 port. Voodoo SMP and its companion UI are
+not distributed here.
 
 ## Validation and scope
 
@@ -40,11 +37,6 @@ create the game's graphics context and that check is optional there.
 This is an **alpha**, not a completed hardcore SMP playthrough. Multiplayer
 progression, balance, every species/biome combination, shaders and optional
 third-party fishing/season/accessory integrations still need playtesting.
-
-The full pack's server overrides set `hardcore=true` and `difficulty=hard` for a
-new server installation. Launching a dedicated server and accepting its EULA
-remain manual steps. No worlds, account data, server lists or launcher credentials
-are included in either pack.
 
 Original Tide 2 by Lightning64; 26.2 migration by soleilfenley; 26.3 community port
 by VoodooHQ. Source and license: https://github.com/vodoohq/java-tide2-patch.

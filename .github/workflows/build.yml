@@ -35,12 +35,14 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y libgl1-mesa-dri libglx-mesa0 mesa-utils xvfb
           xvfb-run -a -s '-screen 0 1280x720x24 +extension GLX' bash gradlew :fabric-26.3:runClientGameTest --console=plain
-      - name: Build distributable packs
-        run: node scripts/build-pack.mjs
+      - name: Package Tide release
+        run: node scripts/package-release.mjs
       - uses: actions/upload-artifact@v7
         with:
           name: tide-fabric-26.3
-          path: build/release/*
+          path: |
+            build/tide-release/tide-*.jar
+            build/tide-release/SHA256SUMS.txt
       - name: Upload screenshots and test reports
         if: always()
         uses: actions/upload-artifact@v7
@@ -61,7 +63,7 @@ jobs:
       - uses: actions/download-artifact@v8
         with:
           name: tide-fabric-26.3
-          path: build/release
+          path: build/tide-release
       - name: Publish alpha assets
         env:
           GH_TOKEN: ${{ github.token }}
@@ -69,4 +71,4 @@ jobs:
           if ! gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
             gh release create "$GITHUB_REF_NAME" --prerelease --title "Tide 2 Fabric 26.3 — Voodoo alpha" --notes-file RELEASE-NOTES.md
           fi
-          gh release upload "$GITHUB_REF_NAME" build/release/* --clobber
+          gh release upload "$GITHUB_REF_NAME" build/tide-release/tide-*.jar build/tide-release/SHA256SUMS.txt --clobber

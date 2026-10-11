@@ -44,6 +44,9 @@ bin/
 ### Mac OS ###
 .DS_Store
 .port-tools/
+/pack/
+/scripts/build-pack.mjs
+/scripts/capture-pack.mjs
 fabric-26.3/*.log
 fabric-26.3/port-status.json
 /src/generated-1.21.1/resources/.cache/

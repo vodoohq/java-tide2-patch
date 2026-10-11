@@ -1,2 +1,0 @@
-resourcePacks:["vanilla","continuity:default","continuity:glass_pane_culling_fix","file/Faithful 32x - 26.3.zip","file/§7§lFaithful §a32× §e§lGlowing §b§lOre.zip"]
-incompatibleResourcePacks:[]

@@ -8,15 +8,12 @@ crates and decorative displays are retained. This fork is currently an alpha.
 
 ## Install
 
-Import `VoodooSMP-26.3-tide-alpha.2.mrpack` in Modrinth App for the full Voodoo SMP
-pack. Tide is already bundled; dependencies and the original resource packs download
-automatically. Import `Tide2-Fabric-26.3-alpha.2.mrpack` for a smaller test instance.
-
-For an existing pack or server, put the Tide release jar in `mods/`, and install
+Download the Tide release jar and put it in your existing pack's or server's `mods/`
+directory. Install
 Fabric API 0.162.0+26.3 and Cloth Config 26.3.159 (Fabric). Use Minecraft 26.3,
 Fabric Loader 0.19.5 and Java 25. The server and every player need this Tide version.
-Remove any other Tide jar first. Modrinth publication is not required to import
-these packs; GitHub Releases provides their downloads.
+Remove any other Tide jar first. This repository distributes only the Tide 2 port;
+Voodoo SMP is not released here.
 
 ## Build and verify
 
@@ -37,16 +34,14 @@ runner cannot currently create Minecraft 26.3's graphics context.
 
 With Node.js installed, `node scripts/migrate-resources.mjs` regenerates the
 Minecraft 26.3 resources from the preserved upstream inputs.
-`node scripts/build-pack.mjs` exports both packs, jars and checksums to `build/release/`.
-The pack manifest pins verified download hashes. To capture a revised local pack,
-run `node scripts/capture-pack.mjs <profile-directory>` and review `pack/` changes.
-The exporter only captures selected settings, mods and resource packs.
+`node scripts/package-release.mjs` packages the Tide jar, source jar and checksums
+in `build/tide-release/`. Public release uploads are restricted to those files.
 
 For an isolated compatibility test against another pack, set `TIDE_PACK_MODS` to
 its `mods` directory before running the client test. Its worlds are never opened.
 The installed Xaero World Map version currently deadlocks with Fabric's test harness
 when closing the test world. Set `TIDE_PACK_SKIP_WORLD_MAP=1` for a complete automated
-pack run; this only excludes it from that test, not from the downloadable pack.
+compatibility run; this only excludes it from that test, not from your local pack.
 
 ## Status
 
@@ -66,5 +61,5 @@ The 26.3 migration is maintained by [VoodooHQ](https://github.com/vodoohq).
 This is an independent community fork.
 
 Tide source and modifications retain [MPL-2.0](LICENSE.txt).
-See [NOTICE.md](NOTICE.md) for attribution and external pack licenses, and
+See [NOTICE.md](NOTICE.md) for attribution, and
 [the preserved upstream README](docs/UPSTREAM-README.md) for the original feature guide.

@@ -15,8 +15,6 @@ Tide source and modifications remain under the **Mozilla Public License 2.0**,
 provided in LICENSE.txt. Downloadable binaries include that license; corresponding
 source is available here and as a release sources jar.
 
-The modpack manifest references external projects distributed under their own
-licenses. Those mods and Faithful resource packs are fetched from their original
-Modrinth downloads with their original hashes and attribution. Their licenses are
-not replaced by this repository's MPL. The Voodoo UI companion is a separate client
-artifact; its bundled attribution and upstream asset licenses still apply.
+Releases distribute only the Tide port and its corresponding source. Required
+dependencies such as Fabric API and Cloth Config retain their own licenses and
+are installed separately. Voodoo SMP and its companion UI are not released here.
