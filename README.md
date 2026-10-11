@@ -30,7 +30,10 @@ Install JDK 25. Generated resources are committed, so a normal build only needs 
 
 On Windows use `gradlew.bat`. On Linux run the client test inside `xvfb-run -a`
 when no display is available. Outputs are under `fabric-26.3/build/libs/`.
-GitHub Actions builds and tests changes; version tags publish prerelease assets.
+GitHub Actions builds changes and runs server GameTests; version tags publish
+prerelease assets. Client smoke tests pass on the local Windows graphics setup.
+They are optional in a manually dispatched workflow because the hosted Linux
+runner cannot currently create Minecraft 26.3's graphics context.
 
 With Node.js installed, `node scripts/migrate-resources.mjs` regenerates the
 Minecraft 26.3 resources from the preserved upstream inputs.

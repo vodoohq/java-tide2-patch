@@ -33,6 +33,9 @@ Xaero World Map causes a Fabric test-harness deadlock when closing the temporary
 world. The compatibility run completes successfully with that mod excluded. This
 does not establish a problem during a normal launcher session; that still needs
 manual playtesting.
+The automatic GitHub workflow verifies compilation and server GameTests. Client
+graphics tests were verified locally; the hosted Linux runner cannot currently
+create the game's graphics context and that check is optional there.
 
 This is an **alpha**, not a completed hardcore SMP playthrough. Multiplayer
 progression, balance, every species/biome combination, shaders and optional
