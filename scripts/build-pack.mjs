@@ -9,6 +9,19 @@ const jar=path.join(root,'fabric-26.3/build/libs',jarName);
 const index=JSON.parse(await fs.readFile('pack/modrinth.index.json','utf8'));
 const javaJar=process.env.JAVA_HOME?path.join(process.env.JAVA_HOME,'bin',process.platform==='win32'?'jar.exe':'jar'):'jar';
 await fs.mkdir('build/release',{recursive:true});
+const uiFile=index.files.find(file=>file.path==='mods/voodoo-ui-1.0.0+26.3.jar');
+if(!uiFile)throw new Error('Voodoo UI dependency missing');
+const uiName=path.basename(uiFile.path);
+let uiData;
+try { uiData=await fs.readFile(path.join('build/downloads',uiName)); }
+catch(error) {
+ if(error.code!=='ENOENT')throw error;
+ const response=await fetch(uiFile.downloads[0]);
+ if(!response.ok)throw new Error(`Voodoo UI download: HTTP ${response.status}`);
+ uiData=Buffer.from(await response.arrayBuffer());
+}
+if(crypto.createHash('sha512').update(uiData).digest('hex')!==uiFile.hashes.sha512)throw new Error('Voodoo UI hash mismatch');
+await fs.writeFile(path.join('build/release',uiName),uiData);
 // A unique directory prevents stale overrides from leaking into a later export.
 const staging=await fs.mkdtemp(path.join(root,'build/pack-'));
 await fs.cp('pack/client-overrides',path.join(staging,'client-overrides'),{recursive:true});
