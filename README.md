@@ -8,9 +8,9 @@ crates and decorative displays are retained. This fork is currently an alpha.
 
 ## Install
 
-Import `VoodooSMP-26.3-tide-alpha.1.mrpack` in Modrinth App for the full Voodoo SMP
+Import `VoodooSMP-26.3-tide-alpha.2.mrpack` in Modrinth App for the full Voodoo SMP
 pack. Tide is already bundled; dependencies and the original resource packs download
-automatically. Import `Tide2-Fabric-26.3-alpha.1.mrpack` for a smaller test instance.
+automatically. Import `Tide2-Fabric-26.3-alpha.2.mrpack` for a smaller test instance.
 
 For an existing pack or server, put the Tide release jar in `mods/`, and install
 Fabric API 0.162.0+26.3 and Cloth Config 26.3.159 (Fabric). Use Minecraft 26.3,

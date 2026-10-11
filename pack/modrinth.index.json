@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
   "game": "minecraft",
-  "versionId": "26.3-tide-alpha.1",
+  "versionId": "26.3-tide-alpha.2",
   "name": "Voodoo SMP",
   "summary": "Voodoo SMP with the full Tide 2 Fabric 26.3 alpha port.",
   "files": [
@@ -261,7 +261,7 @@
       "fileSize": 465553
     },
     {
-      "path": "mods/sodium-fabric-0.9.3-alpha.1+mc26.3.jar",
+      "path": "mods/sodium-fabric-0.9.3-alpha.2+mc26.3.jar",
       "hashes": {
         "sha1": "5d88caf6f3e182cd39d0fb0d2e7200c5e613f287",
         "sha512": "8aa044fea0185855e2ca0971b4e3b3bc1ee4c616e3a7d6ca4d4b979fbb99340678c0bf6acd16be04095bc885b75b4caf95401486e91b65239385e98fab6d3542"
@@ -271,7 +271,7 @@
         "server": "unsupported"
       },
       "downloads": [
-        "https://cdn.modrinth.com/data/AANobbMI/versions/v4PSXean/sodium-fabric-0.9.3-alpha.1%2Bmc26.3.jar"
+        "https://cdn.modrinth.com/data/AANobbMI/versions/v4PSXean/sodium-fabric-0.9.3-alpha.2%2Bmc26.3.jar"
       ],
       "fileSize": 1911459
     },
@@ -331,7 +331,7 @@
         "server": "unsupported"
       },
       "downloads": [
-        "https://github.com/vodoohq/java-tide2-patch/releases/download/v2.1.1-voodoo.26.3-alpha.1/voodoo-ui-1.0.0%2B26.3.jar"
+        "https://github.com/vodoohq/java-tide2-patch/releases/download/v2.1.1-voodoo.26.3-alpha.2/voodoo-ui-1.0.0%2B26.3.jar"
       ],
       "fileSize": 5226120
     },

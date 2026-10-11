@@ -2,7 +2,7 @@ plugins {
     id 'net.fabricmc.fabric-loom' version '1.17.21'
 }
 
-version = '2.1.1+voodoo.26.3.alpha.1'
+version = '2.1.1+voodoo.26.3.alpha.2'
 group = 'com.li64.tide'
 base.archivesName = 'tide-fabric-26.3'
 

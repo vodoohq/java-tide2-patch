@@ -38,13 +38,13 @@ for(const entry of entries){
   const project=projects.find(p=>p.id===version.project_id);
   files.push({path:entry.path,hashes:entry.hashes,env:{client:project.client_side==='unsupported'?'unsupported':'required',server:project.server_side==='unsupported'?'unsupported':'required'},downloads:[file.url],fileSize:entry.data.length});
  }else if(entry.path==='mods/voodoo-ui-1.0.0+26.3.jar'){
-  files.push({path:entry.path,hashes:entry.hashes,env:{client:'required',server:'unsupported'},downloads:['https://github.com/vodoohq/java-tide2-patch/releases/download/v2.1.1-voodoo.26.3-alpha.1/'+encodeURIComponent(path.basename(entry.path))],fileSize:entry.data.length});
+  files.push({path:entry.path,hashes:entry.hashes,env:{client:'required',server:'unsupported'},downloads:['https://github.com/vodoohq/java-tide2-patch/releases/download/v2.1.1-voodoo.26.3-alpha.2/'+encodeURIComponent(path.basename(entry.path))],fileSize:entry.data.length});
   await fs.mkdir('build/downloads',{recursive:true});await fs.writeFile('build/downloads/'+path.basename(entry.path),entry.data);
  }else if(entry.path.startsWith('mods/'))throw new Error('Unrecognized mod: '+entry.path);
  else omitted.push(entry.path);
 }
 await fs.mkdir('pack',{recursive:true});
-await fs.writeFile('pack/modrinth.index.json',JSON.stringify({formatVersion:1,game:'minecraft',versionId:'26.3-tide-alpha.1',name:'Voodoo SMP',summary:'Voodoo SMP with the full Tide 2 Fabric 26.3 alpha port.',files,dependencies:{minecraft:'26.3','fabric-loader':'0.19.5'}},null,2)+'\n');
+await fs.writeFile('pack/modrinth.index.json',JSON.stringify({formatVersion:1,game:'minecraft',versionId:'26.3-tide-alpha.2',name:'Voodoo SMP',summary:'Voodoo SMP with the full Tide 2 Fabric 26.3 alpha port.',files,dependencies:{minecraft:'26.3','fabric-loader':'0.19.5'}},null,2)+'\n');
 // Only settings with a known purpose; generated identities, caches and telemetry are excluded.
 const settings=['badoptimizations.txt','continuity.json','entityculling.json','forgeconfigapiport.toml','immediatelyfast.json','lithium.properties','lootr-client.jsonc','lootr-common.jsonc','simplehudenhanced.toml','sodium-extra-options.json','sodium-extra.properties','sodium-mixins.properties','sodium-options.json','toms_storage.json','travelersbackpack-client.toml','travelersbackpack-common.toml','travelersbackpack-server.toml','visualworkbench-client.toml','visualworkbench-server.toml','fancymenu/options.txt'];
 for(const setting of settings){
@@ -54,4 +54,9 @@ for(const setting of settings){
  await fs.writeFile(destination,contents.replace(/[ \t]+$/gm,''));
 }
 await fs.writeFile('pack/omitted-local-files.json',JSON.stringify(omitted,null,2)+'\n');
+const packOptions=await fs.readFile(path.join(profile,'options.txt'),'utf8');
+const selectedLine=packOptions.split(/\r?\n/).find(line=>line.startsWith('resourcePacks:'));
+const includedPacks=new Set(files.filter(file=>file.path.startsWith('resourcepacks/')).map(file=>'file/'+path.basename(file.path)));
+const selectedPacks=selectedLine?JSON.parse(selectedLine.slice('resourcePacks:'.length)).filter(id=>includedPacks.has(id)||['vanilla','continuity:default','continuity:glass_pane_culling_fix'].includes(id)):['vanilla'];
+await fs.writeFile('pack/client-overrides/options.txt','resourcePacks:'+JSON.stringify(selectedPacks)+'\nincompatibleResourcePacks:[]\n');
 console.log(`Captured ${files.length} verified dependencies; ${omitted.length} local resource packs excluded from distribution.`);
